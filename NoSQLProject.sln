@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSQLProject", "NoSQLProject\NoSQLProject.csproj", "{0AB65AAD-B539-4DAE-955D-0FEE75A1005F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "NoSQLProject\UI.csproj", "{0AB65AAD-B539-4DAE-955D-0FEE75A1005F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{7DAB78A8-F8B5-4FE3-A712-CCD4254D8923}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{14D17611-D7E0-4C15-9704-A7493EA25E2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{D1512E6B-3A46-48C5-9A17-450EF21CBB1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{0AB65AAD-B539-4DAE-955D-0FEE75A1005F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AB65AAD-B539-4DAE-955D-0FEE75A1005F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AB65AAD-B539-4DAE-955D-0FEE75A1005F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DAB78A8-F8B5-4FE3-A712-CCD4254D8923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DAB78A8-F8B5-4FE3-A712-CCD4254D8923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DAB78A8-F8B5-4FE3-A712-CCD4254D8923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DAB78A8-F8B5-4FE3-A712-CCD4254D8923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14D17611-D7E0-4C15-9704-A7493EA25E2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D17611-D7E0-4C15-9704-A7493EA25E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14D17611-D7E0-4C15-9704-A7493EA25E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14D17611-D7E0-4C15-9704-A7493EA25E2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1512E6B-3A46-48C5-9A17-450EF21CBB1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1512E6B-3A46-48C5-9A17-450EF21CBB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1512E6B-3A46-48C5-9A17-450EF21CBB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1512E6B-3A46-48C5-9A17-450EF21CBB1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
