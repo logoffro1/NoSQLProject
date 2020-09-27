@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Service")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Service")]
-[assembly: AssemblyCopyright("Copyright © HP Inc. 2020")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d1512e6b-3a46-48c5-9a17-450ef21cbb1a")]
+[assembly: Guid("4bc0e806-9333-4713-b3fe-f197d6cad227")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DAO")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DAO")]
-[assembly: AssemblyCopyright("Copyright © HP Inc. 2020")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7dab78a8-f8b5-4fe3-a712-ccd4254d8923")]
+[assembly: Guid("a7ca5bb0-a918-4d23-b175-d6b058dd7dd2")]
 
 // Version information for an assembly consists of the following four values:
 //

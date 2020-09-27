@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D1512E6B-3A46-48C5-9A17-450EF21CBB1A}</ProjectGuid>
+    <ProjectGuid>{4BC0E806-9333-4713-B3FE-F197D6CAD227}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Service</RootNamespace>
@@ -41,7 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="User_Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{a7ca5bb0-a918-4d23-b175-d6b058dd7dd2}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{99200f97-e168-49b2-b8a1-3a48660ecfc4}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
