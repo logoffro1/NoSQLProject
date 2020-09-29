@@ -25,19 +25,13 @@ namespace NoSQLProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            User_Service userService = new User_Service();
+            
+        }
 
-            User user = new User
-            {
-                username = "test",
-                password = "pass",
-                firstName = "name",
-                lastName = "lastName",
-                email = "gadgasd",
-                nrTickets = 150
-
-            };
-            userService.AddUser(user);
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            new TicketsOverview().Show();
         }
     }
 }

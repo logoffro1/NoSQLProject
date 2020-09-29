@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
-using System.Threading;
+
 namespace DAO
 {
     public class Base
     {
-        private string connectionString = "mongodb+srv://admin:admin@cluster0.kzqlj.azure.mongodb.net/garden_group?retryWrites=true&w=majority";
+        //password: admin  |  dbName: garden_group
+        private const string CONNECTION_STRING = "mongodb+srv://admin:admin@cluster0.kzqlj.azure.mongodb.net/garden_group?retryWrites=true&w=majority";
         private MongoClient dbClient;
         private IMongoDatabase database;
         public Base()
@@ -22,59 +21,62 @@ namespace DAO
         {
             try
             {
-                dbClient = new MongoClient(connectionString);
+                dbClient = new MongoClient(CONNECTION_STRING);
             }
             catch (Exception e)
             {
                 throw new Exception(e.ToString());
             }
         }
-        protected async void CreateDocument(string collectionName, BsonDocument data)
+        private IMongoCollection<BsonDocument> GetCollection(string collectionName) //gets the specified collection(table) from the DB
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            await collection.InsertOneAsync(data);
+            return database.GetCollection<BsonDocument>(collectionName);
         }
-        protected List<BsonDocument> ReadDocuments(string collectionName)
+        protected async void CreateDocument(string collectionName, BsonDocument data) //Inserts the data into the specified collection
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            return collection.Find(new BsonDocument()).ToList();
+            await GetCollection(collectionName).InsertOneAsync(data);
         }
-        protected BsonDocument ReadDocument(string collectionName, string columnName, int id)
+        protected List<BsonDocument> ReadDocuments(string collectionName) //reads an entire collection from the DB
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
+            return GetCollection(collectionName).Find(new BsonDocument()).ToList();
+        }
+        protected BsonDocument ReadDocument(string collectionName, string columnName, int id) //reads only one document from the DB based on the filter
+        {
             var filter = Builders<BsonDocument>.Filter.Eq(columnName, id);
-            return collection.Find(filter).FirstOrDefault();
+            return GetCollection(collectionName).Find(filter).FirstOrDefault();
         }
-        protected void UpdateDocument(string collectionName, string columnName, int id, string columnToChange, int newId)
+        protected async void UpdateDocument(string collectionName, string columnName, int id, string columnToChange, int newId) //updates a document in the DB (changes an int)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
             var filter = Builders<BsonDocument>.Filter.Eq(columnName, id);
             var update = Builders<BsonDocument>.Update.Set(columnToChange, newId);
 
-            collection.UpdateOne(filter, update);
+            await GetCollection(collectionName).UpdateOneAsync(filter, update);
 
         }
-        protected void UpdateDocument(string collectionName, string columnName, int id, string columnToChange, string newString)
+        protected async void UpdateDocument(string collectionName, string columnName, int id, string columnToChange, string newString)//updates a document in the DB (changes a string)
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
             var filter = Builders<BsonDocument>.Filter.Eq(columnName, id);
             var update = Builders<BsonDocument>.Update.Set(columnToChange, newString);
 
-            collection.UpdateOne(filter, update);
+           await GetCollection(collectionName).UpdateOneAsync(filter, update);
 
         }
-        protected void DeleteDocument(string collectionName, string columnName, int id)
+        protected async void DeleteDocument(string collectionName, string columnName, int id) // deletes document from the specified collectiion
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
             var deleteFilter = Builders<BsonDocument>.Filter.Eq(columnName, id);
-            collection.DeleteOne(deleteFilter);
-
+           await GetCollection(collectionName).DeleteOneAsync(deleteFilter);
         }
-        protected int GetLatestId(string collectionName, string columnName)
+        protected int GetLatestId(string collectionName, string columnName) //gets the ID of the latest document added in the specified collection
         {
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            List<BsonDocument> documents = collection.Find(new BsonDocument()).ToList();
-            return documents[documents.Count - 1][columnName].AsInt32 + 1; 
+            List<BsonDocument> documents = GetCollection(collectionName).Find(new BsonDocument()).ToList();
+
+            int id = 1;
+
+            if (documents.Count != 0)
+                id = documents[documents.Count - 1][columnName].AsInt32 + 1;
+
+            return id;
+            
         }
 
 
