@@ -28,7 +28,8 @@ namespace DAO
                 throw new Exception(e.ToString());
             }
         }
-        protected IMongoCollection<BsonDocument> GetCollection(string collectionName) //gets the specified collection(table) from the DB
+        //THIS HAS TO BE PRIVATE
+        private IMongoCollection<BsonDocument> GetCollection(string collectionName) //gets the specified collection(table) from the DB
         {
             return database.GetCollection<BsonDocument>(collectionName);
         }
