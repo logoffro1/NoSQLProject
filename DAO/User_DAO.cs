@@ -19,6 +19,7 @@ namespace DAO
 
         public bool IsUsernamePresent(string username)
         {
+            //test
             IMongoCollection<BsonDocument> users = GetCollection("users");
          
            /* foreach(BsonDocument doc in users)
