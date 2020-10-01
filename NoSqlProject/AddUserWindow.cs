@@ -23,6 +23,7 @@ namespace NoSQLProject
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
+            //Will have add user function here
 
         }
     }
