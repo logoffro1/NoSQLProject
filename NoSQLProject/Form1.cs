@@ -33,5 +33,11 @@ namespace NoSQLProject
             this.Hide();
             new TicketsOverview().Show();
         }
+
+        private void btnUserManagement_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new UserManagementUI().Show();
+        }
     }
 }

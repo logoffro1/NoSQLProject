@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using Model;
+using MongoDB.Driver;
+
 namespace DAO
 {
     public class User_DAO : Base
@@ -13,6 +15,19 @@ namespace DAO
         {
           CreateDocument("users", createUserDocument(user));
 
+        }
+
+        public bool IsUsernamePresent(string username)
+        {
+            IMongoCollection<BsonDocument> users = GetCollection("users");
+         
+           /* foreach(BsonDocument doc in users)
+            {
+
+            }*/
+
+
+            return false;
         }
         private BsonDocument createUserDocument(User user)
         {
