@@ -15,11 +15,17 @@ namespace NoSQLProject
     public partial class AddUserWindow : Form
     {
         User_Service service;
+        List<User> allUsers;
 
         public AddUserWindow()
         {
             InitializeComponent();
             service = new User_Service();
+            allUsers = new List<User>();
+        }
+        private void AddUserWindow_Load(object sender, EventArgs e)
+        {
+            
         }
 
         //Adds a new user.
@@ -27,7 +33,7 @@ namespace NoSQLProject
         {
             if (isUserValid())
             {
-                User newUser = new User(txtUsername.Text,txtPassword.Text,txtName.Text,txtlastName.Text,txtEmailAddress.Text);
+                User newUser = new User(txtUsername.Text,txtPassword.Text,txtName.Text,txtlastName.Text,txtEmailAddress.Text,0);
                 try
                 {
                     service.AddUser(newUser);
@@ -81,5 +87,7 @@ namespace NoSQLProject
         {
             this.Close();
         }
+
+
     }
 }

@@ -21,16 +21,21 @@ namespace Model
         {
             
         }
-
-
-        public User(string username,string password,string firstName,string lastName,string email)
+        public User(string username, string password, string firstName, string lastName, string email, int nrTickets)
         {
-            nrTickets = 0;
+            
             this.username = username;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
+            this.nrTickets = nrTickets;
+        }
+
+
+        public User(int id,string username,string password,string firstName,string lastName,string email,int nrTickets):this(username,password,firstName,lastName,email,nrTickets)
+        {
+            this.id = id;           
         }
     }
 }

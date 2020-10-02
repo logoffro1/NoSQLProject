@@ -173,6 +173,7 @@
             this.Controls.Add(this.txtName);
             this.Name = "AddUserWindow";
             this.Text = "AddUserWindow";
+            this.Load += new System.EventHandler(this.AddUserWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

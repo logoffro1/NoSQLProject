@@ -19,5 +19,9 @@ namespace Service
         {
             return userDAO.IsUsernamePresent(username);
         }
+        public List<User> getAllUsers()
+        {
+            return userDAO.getAllUsers();
+        }
     }
 }
