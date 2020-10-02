@@ -13,5 +13,9 @@ namespace Service
         {
             new Ticket_DAO().AddTicket(ticket);
         }
+        public List<Ticket> GetAllTickets()
+        {
+            return new Ticket_DAO().GetAllTickets();
+        }
     }
 }

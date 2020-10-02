@@ -97,6 +97,7 @@
             this.Controls.Add(this.btnAdd);
             this.Name = "UserManagementUI";
             this.Text = "UserManagementUI";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserManagementUI_FormClosing);
             this.Load += new System.EventHandler(this.UserManagementUI_Load);
             this.ResumeLayout(false);
 

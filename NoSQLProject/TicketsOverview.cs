@@ -44,15 +44,66 @@ namespace NoSQLProject
             };
             ticketService.AddTicket(ticket);
         }
+        private void LoadListView()
+        {
+            Ticket_Service ticketService = new Ticket_Service();
 
+            foreach(Ticket ticket in ticketService.GetAllTickets())
+            {
+                ListViewItem item = new ListViewItem(ticket.id.ToString());
+                item.SubItems.Add(ticket.subject);
+                item.SubItems.Add("Username");
+                item.SubItems.Add(ticket.incidentDate.ToString());
+                item.SubItems.Add(ticket.type.ToString());
+                item.SubItems.Add(ticket.priority.ToString());
+                item.SubItems.Add(ticket.GetStatus());
+                listViewTickets.Items.Add(item);
+            }
+            
+            listViewTickets.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+           
+        }
         private void TicketsOverview_Load(object sender, EventArgs e)
         {
-
+            LoadListView();
         }
 
         private void TicketsOverview_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void listViewTickets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreateIncident_Click(object sender, EventArgs e)
+        {
+            User_Service userService = new User_Service();
+            Ticket_Service ticketService = new Ticket_Service();
+            User testUser = new User
+            {
+                id = 999,
+                username = "user",
+                password = "pass",
+                firstName = "Alex",
+                lastName = "John",
+                email = "alex@gmail.com",
+                nrTickets = 0
+            };
+            Ticket ticket = new Ticket
+            {
+                reportedByUser = testUser,
+                incidentDate = DateTime.Now,
+                subject = "Crash",
+                isOpen = true,
+                type = TicketIncidentType.Software,
+                priority = TicketPriorityType.Normal,
+                description = "My program crashed wtffff",
+                deadline = TicketDeadline.SevenDays
+            };
+            ticketService.AddTicket(ticket);
         }
     }
 }

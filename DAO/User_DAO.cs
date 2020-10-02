@@ -13,7 +13,7 @@ namespace DAO
     {
         public void AddUser(User user)
         {
-          CreateDocument("users", createUserDocument(user));
+            CreateDocument("users", CreateUserDocument(user));
 
         }
 
@@ -23,16 +23,18 @@ namespace DAO
             List<BsonDocument> docs = ReadDocuments("users");
             List<User> allUsers = new List<User>();
 
-            foreach(BsonDocument doc in docs)
+            foreach (BsonDocument doc in docs)
             {
-                BsonValue username = doc.GetValue("username");
-                BsonValue password = doc.GetValue("password");
-                BsonValue firstName = doc.GetValue("firstName");
-                BsonValue lastName = doc.GetValue("lastName");
-                BsonValue email = doc.GetValue("email");
-                BsonValue nrOfTickets = doc.GetValue("tickets");
-                BsonValue id = doc.GetValue("user_id");
-                User user = new User(id.AsInt32,username.AsString,password.AsString,firstName.AsString,lastName.AsString,email.AsString,nrOfTickets.AsInt32);
+                User user = new User
+                {
+                    username = (string)doc["username"],
+                    password = (string)doc["password"],
+                    firstName = (string)doc["firstName"],
+                    lastName = (string)doc["lastName"],
+                    email = (string)doc["email"],
+                    nrTickets = doc["tickets"].AsInt32,
+                    id = doc["user_id"].AsInt32
+                };
                 allUsers.Add(user);
             }
 
@@ -44,22 +46,17 @@ namespace DAO
         {
             //test
             List<BsonDocument> users = ReadDocuments("users");
-       
-            if (users.Count > 0)
+
+            foreach (BsonDocument doc in users)
             {
-                foreach (BsonDocument doc in users)
-                {
-                    BsonValue element = doc.GetValue("username");
-                    if (element.AsString.ToLower().Equals(username.ToLower()))
-                    {
-                        return true;
-                    }
-                }
+                BsonValue element = doc.GetValue("username");
+                if (element.AsString.ToLower().Equals(username.ToLower()))
+                    return true;
             }
-          
+
             return false;
         }
-        private BsonDocument createUserDocument(User user)
+        private BsonDocument CreateUserDocument(User user)
         {
             return new BsonDocument
             {

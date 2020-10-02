@@ -62,6 +62,9 @@ namespace NoSQLProject
             window.ShowDialog();        
         }
 
-       
+        private void UserManagementUI_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
