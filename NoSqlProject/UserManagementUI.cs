@@ -50,7 +50,8 @@ namespace NoSQLProject
                 userView.Items.Add(item);
             }
 
-            userView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            userView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+           
            
 
         }
@@ -58,8 +59,7 @@ namespace NoSQLProject
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddUserWindow window = new AddUserWindow();
-            window.ShowDialog();
-            FillListView(); // fix this
+            window.ShowDialog();        
         }
 
        

@@ -71,17 +71,17 @@
             // Email
             // 
             this.Email.Text = "Email address";
-            this.Email.Width = 111;
+            this.Email.Width = 200;
             // 
             // FirstName
             // 
             this.FirstName.Text = "First name";
-            this.FirstName.Width = 176;
+            this.FirstName.Width = 200;
             // 
             // LastName
             // 
             this.LastName.Text = "Last name";
-            this.LastName.Width = 166;
+            this.LastName.Width = 200;
             // 
             // Tickets
             // 
