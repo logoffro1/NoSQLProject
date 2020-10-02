@@ -17,17 +17,24 @@ namespace DAO
 
         }
 
+        //Written by Egehan Cinarli: checks if the username is present in the users collection.
         public bool IsUsernamePresent(string username)
         {
             //test
             List<BsonDocument> users = ReadDocuments("users");
-         
-           foreach(BsonDocument doc in users)
+       
+            if (users.Count > 0)
             {
-
+                foreach (BsonDocument doc in users)
+                {
+                    BsonValue element = doc.GetValue("username");
+                    if (element.AsString.ToLower().Equals(username.ToLower()))
+                    {
+                        return true;
+                    }
+                }
             }
-
-
+          
             return false;
         }
         private BsonDocument createUserDocument(User user)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,21 @@ namespace Model
         public string lastName { get; set; }
         public string email { get; set; }
         public int nrTickets { get; set; }
+
+        public User()
+        {
+            
+        }
+
+
+        public User(string username,string password,string firstName,string lastName,string email)
+        {
+            nrTickets = 0;
+            this.username = username;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+        }
     }
 }
