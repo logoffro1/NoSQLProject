@@ -1,13 +1,10 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Bson;
 namespace DAO
 {
-   public class Ticket_DAO : Base
+    public class Ticket_DAO : Base
     {
         private string collectionName = "tickets";
         public void AddTicket(Ticket ticket)
@@ -16,21 +13,21 @@ namespace DAO
         }
         public List<Ticket> GetAllTickets()
         {
-            List<BsonDocument> ticketsBson = ReadDocuments(collectionName);
+            List<BsonDocument> ticketsBson = ReadDocuments(this.collectionName);
             List<Ticket> tickets = new List<Ticket>();
-            foreach(BsonDocument doc in ticketsBson)
+            foreach (BsonDocument doc in ticketsBson)
             {
                 Ticket ticket = new Ticket
                 {
-                    id = (int)doc["ticket_id"],
-                    subject = (string)doc["subject"],
-                    incidentDate = (DateTime)doc["date"],
-                    type = (TicketIncidentType)Enum.Parse(typeof(TicketIncidentType), (string)doc["type"], true),
-                    priority = (TicketPriorityType)Enum.Parse(typeof(TicketPriorityType), (string)doc["priority"], true),
-                    description = (string)doc["description"],         
-                    deadline = (TicketDeadline)Enum.Parse(typeof(TicketDeadline), (string)doc["deadline"], true)
+                    Id = (int)doc["ticket_id"],
+                    Subject = (string)doc["subject"],
+                    IncidentDate = (DateTime)doc["date"],
+                    Type = (TicketIncidentType)Enum.Parse(typeof(TicketIncidentType), (string)doc["type"], true),
+                    Priority = (TicketPriorityType)Enum.Parse(typeof(TicketPriorityType), (string)doc["priority"], true),
+                    Description = (string)doc["description"],
+                    Deadline = (TicketDeadline)Enum.Parse(typeof(TicketDeadline), (string)doc["deadline"], true)
                 };
-                ticket.isOpen = ticket.SetStatus((string)doc["status"]);
+                ticket.IsOpen = ticket.SetStatus((string)doc["status"]);
                 tickets.Add(ticket);
             }
             return tickets;
@@ -39,15 +36,15 @@ namespace DAO
         {
             return new BsonDocument
             {
-                { "ticket_id", GetLatestId("tickets","ticket_id")},
-                { "user_id", ticket.reportedByUser.id },
-                {"date", ticket.incidentDate},
-                {"subject", ticket.subject },
+                {"ticket_id", GetLatestId(this.collectionName,"ticket_id")},
+                {"user_id", ticket.ReportedByUser.id },
+                {"date", ticket.IncidentDate},
+                {"subject", ticket.Subject },
                 {"status",ticket.GetStatus()},
-                {"type",ticket.type.ToString() },
-                {"priority",ticket.priority.ToString() },
-                {"description",ticket.description },
-                {"deadline",ticket.deadline.ToString() }
+                {"type",ticket.Type.ToString() },
+                {"priority",ticket.Priority.ToString() },
+                {"description",ticket.Description },
+                {"deadline",ticket.Deadline.ToString() }
             };
         }
     }

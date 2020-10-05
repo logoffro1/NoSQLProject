@@ -119,6 +119,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddTicketForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddTicketForm.Designer.cs">
+      <DependentUpon>AddTicketForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddUserWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     <Compile Include="UserManagementUI.Designer.cs">
       <DependentUpon>UserManagementUI.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddTicketForm.resx">
+      <DependentUpon>AddTicketForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddUserWindow.resx">
       <DependentUpon>AddUserWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,6 +175,9 @@
     <EmbeddedResource Include="UserManagementUI.resx">
       <DependentUpon>UserManagementUI.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -119,6 +119,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCreateTicket);
             this.Controls.Add(this.listViewTickets);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "TicketsOverview";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TicketsOverview";

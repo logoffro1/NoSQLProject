@@ -17,45 +17,18 @@ namespace NoSQLProject
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            User_Service userService = new User_Service();
-            Ticket_Service ticketService = new Ticket_Service();
-            User testUser = new User
-            {
-                id = 999,
-                username = "user",
-                password = "pass",
-                firstName = "Alex",
-                lastName = "John",
-                email = "alex@gmail.com",
-                nrTickets = 0
-            };
-            Ticket ticket = new Ticket
-            {
-                reportedByUser = testUser,
-                incidentDate = DateTime.Now,
-                subject = "Crash",
-                type = TicketIncidentType.Software,
-                priority = TicketPriorityType.Normal,
-                description = "My program crashed wtffff",
-                deadline = TicketDeadline.SevenDays
-            };
-            ticketService.AddTicket(ticket);
-        }
         private void LoadListView()
         {
             Ticket_Service ticketService = new Ticket_Service();
 
             foreach(Ticket ticket in ticketService.GetAllTickets())
             {
-                ListViewItem item = new ListViewItem(ticket.id.ToString());
-                item.SubItems.Add(ticket.subject);
+                ListViewItem item = new ListViewItem(ticket.Id.ToString());
+                item.SubItems.Add(ticket.Subject);
                 item.SubItems.Add("Username");
-                item.SubItems.Add(ticket.incidentDate.ToString());
-                item.SubItems.Add(ticket.type.ToString());
-                item.SubItems.Add(ticket.priority.ToString());
+                item.SubItems.Add(ticket.IncidentDate.ToString());
+                item.SubItems.Add(ticket.Type.ToString());
+                item.SubItems.Add(ticket.Priority.ToString());
                 item.SubItems.Add(ticket.GetStatus());
                 listViewTickets.Items.Add(item);
             }
@@ -80,30 +53,32 @@ namespace NoSQLProject
 
         private void btnCreateIncident_Click(object sender, EventArgs e)
         {
-            User_Service userService = new User_Service();
-            Ticket_Service ticketService = new Ticket_Service();
-            User testUser = new User
-            {
-                id = 999,
-                username = "user",
-                password = "pass",
-                firstName = "Alex",
-                lastName = "John",
-                email = "alex@gmail.com",
-                nrTickets = 0
-            };
-            Ticket ticket = new Ticket
-            {
-                reportedByUser = testUser,
-                incidentDate = DateTime.Now,
-                subject = "Crash",
-                isOpen = true,
-                type = TicketIncidentType.Software,
-                priority = TicketPriorityType.Normal,
-                description = "My program crashed wtffff",
-                deadline = TicketDeadline.SevenDays
-            };
-            ticketService.AddTicket(ticket);
+            //User_Service userService = new User_Service();
+            //Ticket_Service ticketService = new Ticket_Service();
+            //User testUser = new User
+            //{
+            //    id = 999,
+            //    username = "user",
+            //    password = "pass",
+            //    firstName = "Alex",
+            //    lastName = "John",
+            //    email = "alex@gmail.com",
+            //    nrTickets = 0
+            //};
+            //Ticket ticket = new Ticket
+            //{
+            //    ReportedByUser = testUser,
+            //    IncidentDate = DateTime.Now,
+            //    Subject = "Crash",
+            //    IsOpen = true,
+            //    Type = TicketIncidentType.Software,
+            //    Priority = TicketPriorityType.Normal,
+            //    Description = "My program crashed wtffff",
+            //    Deadline = TicketDeadline.SevenDays
+            //};
+            //ticketService.AddTicket(ticket);
+            this.Hide();
+            new AddTicketForm().Show();
         }
     }
 }
