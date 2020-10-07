@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Policy;
 
 namespace Model
 {
@@ -29,7 +28,6 @@ namespace Model
                 case 2: //28 days
                     Deadline = DateTime.Now.AddDays(28);
                     break;
-
                 case 3: //6 months
                     Deadline = DateTime.Now.AddDays(180);
                     break;

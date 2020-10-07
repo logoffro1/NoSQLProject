@@ -85,5 +85,10 @@ namespace DAO
                 nrTickets = (int)userDoc["tickets"]
             };
         }
+        //Written by Cosmin Ilie: Updates the user's number of tickets
+        public void UpdateUserTickets(User newUser)
+        {
+            UpdateDocument("users", "user_id", newUser.id, "tickets", newUser.nrTickets);
+        }
     }
 }

@@ -23,5 +23,9 @@ namespace Service
         {
             return userDAO.getAllUsers();
         }
+        public void UpdateUserTickets(User newUser)
+        {
+            userDAO.UpdateUserTickets(newUser);
+        }
     }
 }

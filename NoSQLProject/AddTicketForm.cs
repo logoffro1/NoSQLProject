@@ -96,7 +96,8 @@ namespace NoSQLProject
             Ticket_Service ticketService = new Ticket_Service();
             User snitch = GetUserByUsername();
             snitch.nrTickets++;
-            //update User DB
+            userService.UpdateUserTickets(snitch);
+
             Ticket ticket = new Ticket
             {
                 ReportedByUser = snitch,
@@ -110,7 +111,7 @@ namespace NoSQLProject
             };
             ticket.SetDeadline(cmbDeadline.SelectedIndex);
             ticketService.AddTicket(ticket);
-            MessageBox.Show("Ticket created succesfully!","Ticket Created",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+            MessageBox.Show("Ticket created succesfully!", "Ticket Created", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
         private User GetUserByUsername()
         {

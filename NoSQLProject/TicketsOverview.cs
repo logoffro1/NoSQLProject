@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Xml;
 using System.CodeDom.Compiler;
+using System.Diagnostics;
 
 namespace NoSQLProject
 {
@@ -75,7 +76,6 @@ namespace NoSQLProject
         private void TicketsOverview_Load(object sender, EventArgs e)
         {
             LoadListView();
-
             txtFilter.ForeColor = Color.Gray;
         }
         private void RemovePlaceholderText()

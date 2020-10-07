@@ -57,7 +57,7 @@ namespace NoSQLProject
                 return false;
             }
             else if(String.IsNullOrWhiteSpace(txtUsername.Text)||String.IsNullOrWhiteSpace(txtPassword.Text)||String.IsNullOrWhiteSpace(txtName.Text)||String.IsNullOrWhiteSpace(txtEmailAddress.Text)||String.IsNullOrWhiteSpace(txtlastName.Text))
-            {
+            {           
                 MessageBox.Show("Please fill all the fields properly(all fields must be filled","Missing field", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
