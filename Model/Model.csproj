@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ticket.cs" />
-    <Compile Include="TicketDeadline.cs" />
     <Compile Include="TicketIncidentType.cs" />
     <Compile Include="TicketPriorityType.cs" />
     <Compile Include="User.cs" />

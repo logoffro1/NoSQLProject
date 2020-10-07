@@ -17,5 +17,9 @@ namespace Service
         {
             return new Ticket_DAO().GetAllTickets();
         }
+        public void UpdateTicket(Ticket newTicket)
+        {
+            new Ticket_DAO().UpdateTicket(newTicket);
+        }
     }
 }

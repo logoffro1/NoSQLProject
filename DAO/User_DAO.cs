@@ -69,5 +69,21 @@ namespace DAO
                 {"tickets",user.nrTickets }
             };
         }
+        //Written by Cosmin Ilie: returns a user based on the given ID
+        public User GetUserById(int id)
+        {
+            var userDoc = ReadDocument("users", "user_id", id);
+
+            return new User
+            {
+                id = (int)userDoc["user_id"],
+                username = (string)userDoc["username"],
+                password = (string)userDoc["password"],
+                firstName = (string)userDoc["firstName"],
+                lastName = (string)userDoc["lastName"],
+                email = (string)userDoc["email"],
+                nrTickets = (int)userDoc["tickets"]
+            };
+        }
     }
 }

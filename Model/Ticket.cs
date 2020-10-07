@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 
 namespace Model
 {
@@ -11,9 +12,29 @@ namespace Model
         public TicketIncidentType Type { get; set; }
         public TicketPriorityType Priority { get; set; }
         public string Description { get; set; }
-        public TicketDeadline Deadline { get; set; }
+        public DateTime Deadline { get; set; }
         public bool IsOpen { get; set; }
+        public void SetDeadline(int index)
+        {
 
+            switch (index)
+            {
+                
+                case 0: //7 days
+                    Deadline = DateTime.Now.AddDays(7);
+                    break;
+                case 1: //14 days
+                    Deadline = DateTime.Now.AddDays(14);
+                    break;
+                case 2: //28 days
+                    Deadline = DateTime.Now.AddDays(28);
+                    break;
+
+                case 3: //6 months
+                    Deadline = DateTime.Now.AddDays(180);
+                    break;
+            }
+        }
         public string GetStatus()
         {
             if (IsOpen) return "Open";

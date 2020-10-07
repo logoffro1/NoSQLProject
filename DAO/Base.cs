@@ -46,17 +46,17 @@ namespace DAO
             var filter = Builders<BsonDocument>.Filter.Eq(columnName, id);
             return GetCollection(collectionName).Find(filter).FirstOrDefault();
         }
-        protected async void UpdateDocument(string collectionName, string columnName, int id, string columnToChange, int newId) //updates a document in the DB (changes an int)
+        protected async void UpdateDocument(string collectionName, string idColumnName, int id, string columnToChange, int newId) //updates a document in the DB (changes an int)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq(columnName, id);
+            var filter = Builders<BsonDocument>.Filter.Eq(idColumnName, id);
             var update = Builders<BsonDocument>.Update.Set(columnToChange, newId);
 
             await GetCollection(collectionName).UpdateOneAsync(filter, update);
 
         }
-        protected async void UpdateDocument(string collectionName, string columnName, int id, string columnToChange, string newString)//updates a document in the DB (changes a string)
+        protected async void UpdateDocument(string collectionName, string idColumnName, int id, string columnToChange, string newString)//updates a document in the DB (changes a string)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq(columnName, id);
+            var filter = Builders<BsonDocument>.Filter.Eq(idColumnName, id);
             var update = Builders<BsonDocument>.Update.Set(columnToChange, newString);
 
            await GetCollection(collectionName).UpdateOneAsync(filter, update);

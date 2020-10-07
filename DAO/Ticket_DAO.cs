@@ -15,22 +15,27 @@ namespace DAO
         {
             List<BsonDocument> ticketsBson = ReadDocuments(this.collectionName);
             List<Ticket> tickets = new List<Ticket>();
-            foreach (BsonDocument doc in ticketsBson)
+            foreach (var doc in ticketsBson)
             {
                 Ticket ticket = new Ticket
                 {
                     Id = (int)doc["ticket_id"],
+                    ReportedByUser = new User_DAO().GetUserById((int)doc["user_id"]),
                     Subject = (string)doc["subject"],
                     IncidentDate = (DateTime)doc["date"],
                     Type = (TicketIncidentType)Enum.Parse(typeof(TicketIncidentType), (string)doc["type"], true),
                     Priority = (TicketPriorityType)Enum.Parse(typeof(TicketPriorityType), (string)doc["priority"], true),
                     Description = (string)doc["description"],
-                    Deadline = (TicketDeadline)Enum.Parse(typeof(TicketDeadline), (string)doc["deadline"], true)
+                    Deadline = (DateTime)(doc["deadline"])
                 };
                 ticket.IsOpen = ticket.SetStatus((string)doc["status"]);
                 tickets.Add(ticket);
             }
             return tickets;
+        }
+        public void UpdateTicket(Ticket newTicket)
+        {
+            UpdateDocument(collectionName, "ticket_id", newTicket.Id, "status", newTicket.GetStatus());
         }
         private BsonDocument CreateTicketDocument(Ticket ticket)
         {
@@ -44,7 +49,7 @@ namespace DAO
                 {"type",ticket.Type.ToString() },
                 {"priority",ticket.Priority.ToString() },
                 {"description",ticket.Description },
-                {"deadline",ticket.Deadline.ToString() }
+                {"deadline",ticket.Deadline}
             };
         }
     }

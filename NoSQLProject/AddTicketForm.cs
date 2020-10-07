@@ -57,10 +57,11 @@ namespace NoSQLProject
             #endregion
 
             #region Incident deadline combo box
-            foreach (TicketDeadline deadline in Enum.GetValues(typeof(TicketDeadline)))
-            {
-                cmbDeadline.Items.Add($"{(int)deadline} days");
-            }
+            cmbDeadline.Items.Add("7 days");
+            cmbDeadline.Items.Add("14 days");
+            cmbDeadline.Items.Add("28 days");
+            cmbDeadline.Items.Add("6 months");
+
             cmbDeadline.SelectedIndex = 0;
             #endregion
 
@@ -71,7 +72,7 @@ namespace NoSQLProject
             if (CanCreateTicket())
                 CreateTicket();
             else
-                MessageBox.Show("All fields must be completed!","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("All fields must be completed!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         private bool CanCreateTicket()
         {
@@ -93,20 +94,23 @@ namespace NoSQLProject
         private void CreateTicket()
         {
             Ticket_Service ticketService = new Ticket_Service();
-
+            User snitch = GetUserByUsername();
+            snitch.nrTickets++;
+            //update User DB
             Ticket ticket = new Ticket
             {
-                ReportedByUser = GetUserByUsername(),
+                ReportedByUser = snitch,
                 IncidentDate = dateReported.Value,
                 Subject = txtSubject.Text,
                 Type = (TicketIncidentType)cmbType.SelectedItem,
                 Priority = (TicketPriorityType)cmbPriority.SelectedItem,
                 Description = txtDescription.Text,
-                Deadline = (TicketDeadline)cmbDeadline.SelectedIndex,
                 IsOpen = true
-               
+
             };
+            ticket.SetDeadline(cmbDeadline.SelectedIndex);
             ticketService.AddTicket(ticket);
+            MessageBox.Show("Ticket created succesfully!","Ticket Created",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
         }
         private User GetUserByUsername()
         {
@@ -125,6 +129,7 @@ namespace NoSQLProject
         {
             this.Hide();
             new TicketsOverview().Show();
+
         }
     }
 }
