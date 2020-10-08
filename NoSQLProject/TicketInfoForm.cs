@@ -1,5 +1,7 @@
 ﻿using System.Windows.Forms;
 using Model;
+using Service;
+
 namespace NoSQLProject
 {
     public partial class TicketInfoForm : Form
@@ -12,6 +14,15 @@ namespace NoSQLProject
 
             if (ticket != null)
                 DisplayInfo();
+
+            if (ticket.IsOpen)
+            {
+                btnTransfer.Enabled = true;
+            }
+            else
+            {
+                btnTransfer.Enabled = false;
+            }
         }
         private void DisplayInfo()
         {
@@ -28,6 +39,12 @@ namespace NoSQLProject
         private void btnReturn_Click(object sender, System.EventArgs e)
         {
             this.Hide();
+        }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            TransferTicketsUI ticketsUI = new TransferTicketsUI(ticket);
+            ticketsUI.ShowDialog();
         }
     }
 }

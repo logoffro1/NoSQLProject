@@ -39,6 +39,7 @@
             this.lblType = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
+            this.btnTransfer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -152,11 +153,23 @@
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
+            // btnTransfer
+            // 
+            this.btnTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTransfer.Location = new System.Drawing.Point(382, 369);
+            this.btnTransfer.Name = "btnTransfer";
+            this.btnTransfer.Size = new System.Drawing.Size(187, 45);
+            this.btnTransfer.TabIndex = 11;
+            this.btnTransfer.Text = "Transfer tickets";
+            this.btnTransfer.UseVisualStyleBackColor = true;
+            this.btnTransfer.Click += new System.EventHandler(this.button1_Click);
+            // 
             // TicketInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 426);
+            this.Controls.Add(this.btnTransfer);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblPriority);
@@ -191,5 +204,6 @@
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Button btnReturn;
+        private System.Windows.Forms.Button btnTransfer;
     }
 }

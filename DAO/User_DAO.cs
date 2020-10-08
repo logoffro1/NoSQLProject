@@ -44,7 +44,7 @@ namespace DAO
         //Written by Egehan Cinarli: checks if the username is present in the users collection.
         public bool IsUsernamePresent(string username)
         {
-            //test
+            
             List<BsonDocument> users = ReadDocuments("users");
 
             foreach (BsonDocument doc in users)

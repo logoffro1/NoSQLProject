@@ -27,5 +27,9 @@ namespace Service
         {
             userDAO.UpdateUserTickets(newUser);
         }
+        public User GetUserById(int id)
+        {
+            return userDAO.GetUserById(id);
+        }
     }
 }
