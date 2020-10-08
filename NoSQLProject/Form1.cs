@@ -39,5 +39,11 @@ namespace NoSQLProject
             this.Hide();
             new UserManagementUI().Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Dashboard().Show();
+            this.Hide();
+        }
     }
 }
