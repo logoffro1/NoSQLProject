@@ -62,10 +62,37 @@ namespace NoSQLProject
             string [] selectedUser = cmbUsers.SelectedItem.ToString().Split('.');
             int id = int.Parse(selectedUser[0]);
             User newUser = userService.GetUserById(id);
-            oldUser.nrTickets--;
-            newUser.nrTickets++;
-            userService.UpdateUserTickets(oldUser);
-            userService.UpdateUserTickets(newUser);
+
+            if (oldUser.id != newUser.id)
+            {
+                try
+                {
+                    if (oldUser.nrTickets > 0)
+                    {
+                        oldUser.nrTickets--;
+                        newUser.nrTickets++;
+                        userService.UpdateUserTickets(oldUser);
+                        userService.UpdateUserTickets(newUser);
+                    }                
+
+                    ticket.ReportedByUser = newUser;
+                    ticketService.UpdateTicketUser(ticket);
+                    MessageBox.Show("User of the ticket is updated", "Transfer completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine($"Something went wrong:{exception.Message}");
+                }
+                finally
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please do not pick the same user ", "Transfer failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
     }
 }

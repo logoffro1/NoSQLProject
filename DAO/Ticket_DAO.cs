@@ -37,6 +37,13 @@ namespace DAO
         {
             UpdateDocument(collectionName, "ticket_id", newTicket.Id, "status", newTicket.GetStatus());
         }
+
+        //Updates the id of the user who entered the incident.
+        public void UpdateTicketUser(Ticket newTicket)
+        {
+            UpdateDocument(collectionName, "ticket_id", newTicket.Id, "user_id", newTicket.ReportedByUser.id);
+        }
+
         private BsonDocument CreateTicketDocument(Ticket ticket)
         {
             return new BsonDocument

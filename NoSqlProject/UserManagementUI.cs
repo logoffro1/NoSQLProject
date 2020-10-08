@@ -24,7 +24,6 @@ namespace NoSQLProject
         }
         private void UserManagementUI_Load(object sender, EventArgs e)
         {
-            allUsers = service.getAllUsers();
             FillListView();
             FillComboBox();
         }
@@ -155,6 +154,7 @@ namespace NoSQLProject
 
         private void FillListView()
         {
+            allUsers = service.getAllUsers();
             userView.Clear();
             userView.Columns.Add("Id");
             userView.Columns.Add("Email address");
@@ -172,7 +172,8 @@ namespace NoSQLProject
         private void btnAdd_Click(object sender, EventArgs e)
         {
             AddUserWindow window = new AddUserWindow();
-            window.ShowDialog();        
+            window.ShowDialog();
+            FillListView();
         }
 
         private void UserManagementUI_FormClosing(object sender, FormClosingEventArgs e)
@@ -183,6 +184,13 @@ namespace NoSQLProject
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             filterUsers();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+            this.Hide();
+            form.ShowDialog();            
         }
     }
 }

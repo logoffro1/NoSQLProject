@@ -39,6 +39,7 @@
             this.cmbType = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -128,11 +129,22 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Filter:";
             // 
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(404, 28);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(181, 48);
+            this.btnBack.TabIndex = 7;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // UserManagementUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.cmbType);
@@ -160,5 +172,6 @@
         private System.Windows.Forms.ComboBox cmbType;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnBack;
     }
 }

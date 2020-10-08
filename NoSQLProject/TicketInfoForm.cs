@@ -45,6 +45,8 @@ namespace NoSQLProject
         {
             TransferTicketsUI ticketsUI = new TransferTicketsUI(ticket);
             ticketsUI.ShowDialog();
+
+            //after here we should update the ticket form (name of the user stays the same) but I didnt want to ask stuff to your code without asking bro so ill wait -ege
         }
     }
 }

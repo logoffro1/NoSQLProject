@@ -21,5 +21,9 @@ namespace Service
         {
             new Ticket_DAO().UpdateTicket(newTicket);
         }
+        public void UpdateTicketUser(Ticket newTicket)
+        {
+            new Ticket_DAO().UpdateTicketUser(newTicket);
+        }
     }
 }
