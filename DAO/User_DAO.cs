@@ -56,6 +56,25 @@ namespace DAO
 
             return false;
         }
+        public User GetUserByName(string username)
+        {
+           
+            List<User> users = getAllUsers();
+            foreach (User user in users)
+            {
+                if(user.username == username)
+                {
+                    return user;                 
+                }
+                    
+            }
+            return new User  //this is unreachable
+            {
+                id = 0
+            };
+
+
+        }
         private BsonDocument CreateUserDocument(User user)
         {
             return new BsonDocument

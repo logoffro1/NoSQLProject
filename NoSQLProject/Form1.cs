@@ -45,5 +45,11 @@ namespace NoSQLProject
             new Dashboard().Show();
             this.Hide();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new LoginForm().Show();
+            this.Hide();
+        }
     }
 }

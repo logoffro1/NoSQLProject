@@ -31,5 +31,9 @@ namespace Service
         {
             return userDAO.GetUserById(id);
         }
+        public User GetUserByName(string username)
+        {
+            return userDAO.GetUserByName(username);
+        }
     }
 }
