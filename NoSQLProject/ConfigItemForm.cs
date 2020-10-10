@@ -15,6 +15,8 @@ namespace NoSQLProject
 {
     public partial class ConfigItemForm : Form
     {
+        ConfigurationItem_Service configItemService = new ConfigurationItem_Service();
+
         public ConfigItemForm()
         {
             InitializeComponent();
@@ -24,17 +26,18 @@ namespace NoSQLProject
         {
             String name = textBoxCIName.Text;
             String description = textBoxCIDescription.Text;
-            int owner = Convert.ToInt32(comboBoxOwner.SelectedValue);
+            int owner = Convert.ToInt32(comboBoxOwner.SelectedValue.ToString()); // Doesn't Work
             String location = textBoxLocation.Text;
             TicketPriorityType importance = (TicketPriorityType)comboBoxImportance.SelectedIndex;
             ConfigurationItem configurationItem = new ConfigurationItem(name, description, owner, location, importance);
             MessageBox.Show(configurationItem.ToString()); // Successfully added
-            this.Close();
+            //configItemService.AddConfigItem(configurationItem);
+            //this.Close();
         }
 
         private void ConfigItemForm_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(sender.ToString());
+            //MessageBox.Show(sender.ToString());
             User_Service userService = new User_Service();
             List<User> userList = userService.getAllUsers();
             comboBoxOwner.BeginUpdate();

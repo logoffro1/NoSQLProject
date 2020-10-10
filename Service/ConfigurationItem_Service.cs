@@ -8,38 +8,38 @@ using Model;
 
 namespace Service
 {
-    class ConfigurationItem_Service
+    public class ConfigurationItem_Service
     {
-        static ConfigurationItem_DAO ConfigurationItemDAO = new DAO.ConfigurationItem_DAO();
+        private ConfigurationItem_DAO ConfigurationItemDAO = new DAO.ConfigurationItem_DAO();
 
-        void AddConfigItem(ConfigurationItem ci)
+        public void AddConfigItem(ConfigurationItem ci)
         {
-            ConfigurationItem_DAO.AddConfigItem(ci);
+            ConfigurationItemDAO.AddConfigItem(ci);
         }
 
-        void GetConfigItemByID(string id)
+        public ConfigurationItem GetConfigItemByID(string id)
         {
-            ConfigurationItem_DAO.GetConfigItemByID(id);
+           return ConfigurationItemDAO.GetConfigItemByID(id);
         }
 
-        void GetAllConfigItems()
+        public List<ConfigurationItem> GetAllConfigItems()
         {
-            ConfigurationItem_DAO.GetAllConfigItems();
+            return ConfigurationItemDAO.GetAllConfigItems();
         }
 
-        void UpdateConfigItem(ConfigurationItem configItem)
+        public void UpdateConfigItem(ConfigurationItem configItem)
         {
-            ConfigurationItem_DAO.UpdateConfigItem(configItem);
+            ConfigurationItemDAO.UpdateConfigItem(configItem);
         }
 
-        void GetConfigItemsByLocation(string location)
+        public List<ConfigurationItem> GetConfigItemsByLocation(string location)
         {
-            ConfigurationItem_DAO.GetConfigItemsByLocation(location);
+            return ConfigurationItemDAO.GetConfigItemsByLocation(location);
         }
 
-        void GetConfigItemsByImportance(TicketPriorityType Importance)
+        public List<ConfigurationItem> GetConfigItemsByImportance(TicketPriorityType Importance)
         {
-            ConfigurationItem_DAO.GetConfigItemsByImportance(Importance);
+            return ConfigurationItemDAO.GetConfigItemsByImportance(Importance);
         }
     }
 }

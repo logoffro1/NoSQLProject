@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using MongoDB.Bson;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,34 +10,49 @@ namespace DAO
 {
     public class ConfigurationItem_DAO : Base
     {
-        public static void AddConfigItem(ConfigurationItem ci)
+        private const string COLLECTION_NAME = "configitemdb";
+
+        public void AddConfigItem(ConfigurationItem ci)
+        {
+            CreateDocument(COLLECTION_NAME, CreateConfigurationItemDocument(ci));
+        }
+
+        public ConfigurationItem GetConfigItemByID(string id)
         {
             throw new NotImplementedException();
         }
 
-        public static ConfigurationItem GetConfigItemByID(string id)
+        public List<ConfigurationItem> GetAllConfigItems()
         {
             throw new NotImplementedException();
         }
 
-        public static List<ConfigurationItem> GetAllConfigItems()
+        public void UpdateConfigItem(ConfigurationItem configItem)
         {
             throw new NotImplementedException();
         }
 
-        public static void UpdateConfigItem(ConfigurationItem configItem)
+        public List<ConfigurationItem> GetConfigItemsByLocation(string location)
         {
             throw new NotImplementedException();
         }
 
-        public static List<ConfigurationItem> GetConfigItemsByLocation(string location)
+        public List<ConfigurationItem> GetConfigItemsByImportance(TicketPriorityType importance)
         {
             throw new NotImplementedException();
         }
 
-        public static List<ConfigurationItem> GetConfigItemsByImportance(TicketPriorityType importance)
+        private BsonDocument CreateConfigurationItemDocument(ConfigurationItem configItem)
         {
-            throw new NotImplementedException();
+            return new BsonDocument
+            {
+                {"CI_ID", configItem.ID},
+                {"name", configItem.Name},
+                {"description", configItem.Description},
+                {"owner", configItem.Owner},
+                {"location", configItem.Location},
+                {"importance", configItem.Importance}
+            };
         }
     }
 }
