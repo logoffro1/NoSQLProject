@@ -17,25 +17,5 @@ namespace Model
         public string email { get; set; }
         public int nrTickets { get; set; }
 
-        public User()
-        {
-            
-        }
-        public User(string username, string password, string firstName, string lastName, string email, int nrTickets)
-        {
-            
-            this.username = username;
-            this.password = password;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.email = email;
-            this.nrTickets = nrTickets;
-        }
-
-
-        public User(int id,string username,string password,string firstName,string lastName,string email,int nrTickets):this(username,password,firstName,lastName,email,nrTickets)
-        {
-            this.id = id;           
-        }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace NoSQLProject
 {
+    //Written by Egehan Cinarli  641716
     public partial class AddUserWindow : Form
     {
         User_Service service;
@@ -33,7 +34,15 @@ namespace NoSQLProject
         {
             if (isUserValid())
             {
-                User newUser = new User(txtUsername.Text,txtPassword.Text,txtName.Text,txtlastName.Text,txtEmailAddress.Text,0);
+                User newUser = new User
+                {
+                    username = txtUsername.Text,
+                    password = txtPassword.Text,
+                    lastName = txtlastName.Text,
+                    firstName = txtName.Text,
+                    email = txtEmailAddress.Text,
+                    nrTickets = 0
+                };
                 try
                 {
                     service.AddUser(newUser);
