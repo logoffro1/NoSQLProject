@@ -20,21 +20,23 @@ namespace Model
 
         public TicketPriorityType Importance { get; set; }
 
-        public ConfigurationItem(string name, string description, int owner, TicketPriorityType importance)
+        public ConfigurationItem(string name, string description, int owner, string location, TicketPriorityType importance)
         {
             this.ID = GenerateConfigurationItemID();
             this.Name = name;
             this.Description = description;
             this.Owner = owner;
+            this.Location = location;
             this.Importance = importance;
         }
 
-        public ConfigurationItem(string id, string name, string description, int owner, TicketPriorityType importance)
+        public ConfigurationItem(string id, string name, string description, int owner, string location, TicketPriorityType importance)
         {
             this.ID = id;
             this.Name = name;
             this.Description = description;
             this.Owner = owner;
+            this.Location = location;
             this.Importance = importance;
         }
 
@@ -45,6 +47,16 @@ namespace Model
         private string GenerateConfigurationItemID()
         {
             throw new NotImplementedException();
+        }
+
+        public override String ToString()
+        {
+            return String.Format($"ID: {ID}\n" +
+                $"Name: {Name}\n" +
+                $"Description: {Description}\n" +
+                $"Owner: {Owner}\n" +
+                $"Location: {Location}\n" +
+                $"Importance: {Importance}\n");
         }
     }
 }

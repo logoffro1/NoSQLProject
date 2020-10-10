@@ -54,7 +54,8 @@ namespace NoSQLProject
 
         private void buttonConfigItem_Click(object sender, EventArgs e)
         {
-
+            new ConfigItemUI().Show();
+            this.Hide();
         }
     }
 }

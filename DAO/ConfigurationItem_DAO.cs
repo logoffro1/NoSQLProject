@@ -14,12 +14,12 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public static void GetConfigItemByID(string id)
+        public static ConfigurationItem GetConfigItemByID(string id)
         {
             throw new NotImplementedException();
         }
 
-        public static void GetAllConfigItems()
+        public static List<ConfigurationItem> GetAllConfigItems()
         {
             throw new NotImplementedException();
         }
@@ -29,12 +29,12 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public static void GetConfigItemsByLocation(string location)
+        public static List<ConfigurationItem> GetConfigItemsByLocation(string location)
         {
             throw new NotImplementedException();
         }
 
-        public static void GetConfigItemsByImportance(TicketPriorityType importance)
+        public static List<ConfigurationItem> GetConfigItemsByImportance(TicketPriorityType importance)
         {
             throw new NotImplementedException();
         }

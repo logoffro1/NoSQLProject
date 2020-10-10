@@ -16,5 +16,11 @@ namespace NoSQLProject
         {
             InitializeComponent();
         }
+
+        private void NewConfigItem_Click(object sender, EventArgs e)
+        {
+            new ConfigItemForm().Show();
+            
+        }
     }
 }

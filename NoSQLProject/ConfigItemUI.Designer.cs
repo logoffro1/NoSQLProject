@@ -28,12 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.NewConfigItem = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // NewConfigItem
+            // 
+            this.NewConfigItem.Location = new System.Drawing.Point(12, 387);
+            this.NewConfigItem.Name = "NewConfigItem";
+            this.NewConfigItem.Size = new System.Drawing.Size(111, 51);
+            this.NewConfigItem.TabIndex = 0;
+            this.NewConfigItem.Text = "Add New Configuration Item";
+            this.NewConfigItem.UseVisualStyleBackColor = true;
+            this.NewConfigItem.Click += new System.EventHandler(this.NewConfigItem_Click);
+            // 
+            // ConfigItemUI
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.NewConfigItem);
+            this.Name = "ConfigItemUI";
             this.Text = "ConfigItemUI";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button NewConfigItem;
     }
 }
