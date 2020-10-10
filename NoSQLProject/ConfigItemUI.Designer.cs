@@ -55,7 +55,7 @@
             this.textBoxFilterCI.Name = "textBoxFilterCI";
             this.textBoxFilterCI.Size = new System.Drawing.Size(196, 20);
             this.textBoxFilterCI.TabIndex = 1;
-            this.textBoxFilterCI.Text = "Filter Items..";
+            this.textBoxFilterCI.Text = "Filter Items...";
             this.textBoxFilterCI.TextChanged += new System.EventHandler(this.textBoxFilterCI_TextChanged);
             // 
             // listViewConfigurationItems

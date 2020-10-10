@@ -1,10 +1,9 @@
 ﻿using Model;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using MongoDB.Bson;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DAO
 {
@@ -24,7 +23,8 @@ namespace DAO
 
         public List<ConfigurationItem> GetAllConfigItems()
         {
-            throw new NotImplementedException();
+            List<BsonDocument> docsList = ReadDocuments(COLLECTION_NAME);
+            return CreateConfigurationItems(docsList);
         }
 
         public void UpdateConfigItem(ConfigurationItem configItem)
@@ -53,6 +53,27 @@ namespace DAO
                 {"location", configItem.Location},
                 {"importance", configItem.Importance}
             };
+        }
+
+        private List<ConfigurationItem> CreateConfigurationItems(List<BsonDocument> docsList)
+        {
+            List<ConfigurationItem> configurationItems = new List<ConfigurationItem>();
+
+            foreach (BsonDocument doc in docsList)
+            {
+                configurationItems.Add(
+                    new ConfigurationItem(
+                        (string) doc["CI_ID"],
+                        (string) doc["name"],
+                        (string) doc["description"],
+                        Convert.ToInt32(doc["owner"]),
+                        (string) doc["location"],
+                        (TicketPriorityType) Convert.ToInt32(doc["importance"]))
+                );
+                //MessageBox.Show(configurationItems.Last().ToString());
+            }
+
+            return configurationItems;
         }
     }
 }
