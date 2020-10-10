@@ -131,6 +131,12 @@
     <Compile Include="AddUserWindow.Designer.cs">
       <DependentUpon>AddUserWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfigItemUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigItemUI.Designer.cs">
+      <DependentUpon>ConfigItemUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,12 @@
     </Compile>
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigItemForm.Designer.cs">
+      <DependentUpon>ConfigItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -180,6 +192,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddUserWindow.resx">
       <DependentUpon>AddUserWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigItemForm.resx">
+      <DependentUpon>ConfigItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigItemUI.resx">
+      <DependentUpon>ConfigItemUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>

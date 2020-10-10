@@ -27,7 +27,7 @@ namespace NoSQLProject
             int owner = Convert.ToInt32(comboBoxOwner.SelectedValue);
             String location = textBoxLocation.Text;
             TicketPriorityType importance = (TicketPriorityType)comboBoxImportance.SelectedIndex;
-            ConfigurationItem configurationItem = new ConfigurationItem("arf", name, description, owner, location, importance);
+            ConfigurationItem configurationItem = new ConfigurationItem(name, description, owner, location, importance);
             MessageBox.Show(configurationItem.ToString()); // Successfully added
             this.Close();
         }
