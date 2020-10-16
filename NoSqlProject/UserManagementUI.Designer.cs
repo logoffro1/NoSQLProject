@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserManagementUI));
             this.btnAdd = new System.Windows.Forms.Button();
             this.userView = new System.Windows.Forms.ListView();
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -151,6 +152,7 @@
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.userView);
             this.Controls.Add(this.btnAdd);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserManagementUI";
             this.Text = "UserManagementUI";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserManagementUI_FormClosing);

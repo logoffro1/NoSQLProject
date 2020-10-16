@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddUserWindow));
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtlastName = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -171,6 +172,7 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.txtlastName);
             this.Controls.Add(this.txtName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddUserWindow";
             this.Text = "AddUserWindow";
             this.Load += new System.EventHandler(this.AddUserWindow_Load);
