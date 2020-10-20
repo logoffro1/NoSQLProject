@@ -28,10 +28,7 @@ namespace NoSQLProject
             listViewTickets.Items.Clear();
 
             foreach (ListViewItem item in GetFullListView().Items)
-            {
-
                 listViewTickets.Items.Add((ListViewItem)item.Clone());
-            }
 
             ColorListRows();
             listViewTickets.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -142,7 +139,6 @@ namespace NoSQLProject
                         User_Service userService = new User_Service();
                         ticket.ReportedByUser.nrTickets--;
                         userService.UpdateUserTickets(ticket.ReportedByUser);
-
                     }
 
                     ticketService.UpdateTicket(ticket);
