@@ -60,7 +60,7 @@ namespace NoSQLProject
             List<Ticket> allTickets = ticket_Service.GetAllTickets();
 
             //gets the nr of tickets that are over their deadline
-            int overDeadlineTicketNr = allTickets.Where(t => t.Deadline < DateTime.Now).ToList().Count;
+            int overDeadlineTicketNr = allTickets.Where(t => t.Deadline < DateTime.Now && t.IsOpen).ToList().Count;
             lblUrgentTickets.Text = $"There are {overDeadlineTicketNr} ticket(s) that needs urgent attention!";
 
             //if there are more than 3 tickets that over their deadline, the color becomes red

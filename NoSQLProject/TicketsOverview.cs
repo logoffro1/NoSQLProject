@@ -51,7 +51,7 @@ namespace NoSQLProject
             }
             return tempList;
         }
-        private void ColorListRows() //color the status column/row
+        private void ColorListRows() //color the status column
         {
             foreach (ListViewItem item in listViewTickets.Items)
             {
