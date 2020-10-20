@@ -74,9 +74,9 @@ namespace NoSQLProject
             List<Ticket> allTickets = ticket_Service.GetAllTickets();
 
             //gets the nr of open tickets for each priority
-            int highPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.High).Where(t => t.IsOpen).ToList().Count;
-            int normalPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.Normal).Where(t => t.IsOpen).ToList().Count;
-            int lowPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.Low).Where(t => t.IsOpen).ToList().Count;
+            int highPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.High && t.IsOpen).ToList().Count;
+            int normalPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.Normal && t.IsOpen).ToList().Count;
+            int lowPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.Low && t.IsOpen).ToList().Count;
 
             lblHighPriorityTickets.Text = $"Tickets with high priority; {highPriorityTicketNr}";
             lblNormalPriorityTickets.Text = $"Tickets with normal priority; {normalPriorityTicketNr}";
