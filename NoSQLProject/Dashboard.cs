@@ -18,9 +18,12 @@ namespace NoSQLProject
     {
         Ticket_Service ticket_Service = new Ticket_Service();
         User_Service user_Service = new User_Service();
-        public Dashboard()
+        List<Ticket> tickets;
+        User user;
+        public Dashboard(User user)
         {
             InitializeComponent();
+            this.user = user;
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -31,6 +34,58 @@ namespace NoSQLProject
 
         private void Initialize()
         {
+            DisplayGeneralPanel();
+        }
+
+        private void DisplayPersonalPanel()
+        {
+            pnlGeneral.Hide();
+            pnlPersonal.Show();
+            lblWelcome.Text = $"Welcome {user.firstName} {user.lastName}";
+            tickets = ticket_Service.GetAllTickets();
+            lblPersonalTicketInfo.Text = $"You have {tickets.Where(t => t.ReportedByUser.id.Equals(this.user.id) && t.IsOpen).ToList().Count} open ticket(s).";
+            LoadListView();
+
+        }
+        private void LoadListView()
+        {
+            //fills the ticket list for personal open tickets
+            listViewTicket.Clear();
+
+            ColumnHeader ticketID = new ColumnHeader();
+            ticketID.Text = "ID";
+            ColumnHeader ticketSubject = new ColumnHeader();
+            ticketSubject.Text = "Subject";
+            ColumnHeader ticketUser= new ColumnHeader();
+            ticketUser.Text = "User";
+            ColumnHeader ticketDate = new ColumnHeader();
+            ticketDate.Text = "Date";
+            ColumnHeader ticketType = new ColumnHeader();
+            ticketType.Text = "Type";
+            ColumnHeader ticketPriority = new ColumnHeader();
+            ticketPriority.Text = "Priority";
+            
+            listViewTicket.Columns.AddRange(new ColumnHeader[] { ticketID, ticketSubject, ticketUser, ticketDate,ticketType, ticketPriority});
+
+            foreach (Ticket t in tickets.Where(t=> t.ReportedByUser.id.Equals(this.user.id) && t.IsOpen))
+            {
+                ListViewItem li = new ListViewItem(t.Id.ToString());
+                li.SubItems.Add(t.Subject.ToString());
+                li.SubItems.Add(t.ReportedByUser.firstName);
+                li.SubItems.Add(t.IncidentDate.ToString("dd-MMM-yy"));
+                li.SubItems.Add(t.Type.ToString());
+                li.SubItems.Add(t.Priority.ToString());
+
+                listViewTicket.Items.Add(li);
+            }
+
+            listViewTicket.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void DisplayGeneralPanel()
+        {
+            pnlPersonal.Hide();
+            pnlGeneral.Show();   
             DisplayPriorityTexts();
             DisplayDeadlineText();
             DisplayStatusTex();
@@ -91,6 +146,37 @@ namespace NoSQLProject
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblDateTime.Text = DateTime.Now.ToString();
+        }
+
+        private void btnGeneral_Click(object sender, EventArgs e)
+        {
+            DisplayGeneralPanel();
+        }
+
+        private void btnPersonal_Click(object sender, EventArgs e)
+        {
+            DisplayPersonalPanel();
+        }
+
+        private void listViewTicket_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Ticket ticket = GetTicketById(int.Parse(listViewTicket.SelectedItems[0].Text));
+            new TicketInfoForm(ticket).ShowDialog();
+        }
+
+        private Ticket GetTicketById(int id)
+        {
+            foreach (Ticket ticket in tickets)
+                if (ticket.Id == id)
+                    return ticket;
+
+            return null;
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            new LoginForm().Show();
+            this.Close();
         }
     }
 }

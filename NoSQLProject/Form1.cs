@@ -42,7 +42,8 @@ namespace NoSQLProject
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new Dashboard().Show();
+            User_Service userService = new User_Service();
+            new Dashboard(userService.GetUserById(1)).Show();
             this.Hide();
         }
 
