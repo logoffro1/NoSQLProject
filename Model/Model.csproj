@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationItem.cs" />
+    <Compile Include="ConfigurationItemType.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="TicketIncidentType.cs" />
     <Compile Include="TicketPriorityType.cs" />

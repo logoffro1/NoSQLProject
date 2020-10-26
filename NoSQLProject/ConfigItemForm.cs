@@ -26,13 +26,14 @@ namespace NoSQLProject
         {
             String name = textBoxCIName.Text;
             String description = textBoxCIDescription.Text;
-            int owner = Convert.ToInt32(comboBoxOwner.SelectedValue.ToString()); // Doesn't Work
+            int owner = int.Parse(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]);
+            MessageBox.Show(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]); // Doesn't Work
             String location = textBoxLocation.Text;
-            TicketPriorityType importance = (TicketPriorityType)comboBoxImportance.SelectedIndex;
-            ConfigurationItem configurationItem = new ConfigurationItem(name, description, owner, location, importance);
-            MessageBox.Show(configurationItem.ToString()); // Successfully added
-            //configItemService.AddConfigItem(configurationItem);
-            //this.Close();
+            TicketPriorityType importance = (TicketPriorityType) comboBoxImportance.SelectedItem;
+            ConfigurationItem configurationItem = new ConfigurationItem(name, description, owner, location, importance); 
+            //MessageBox.Show(configurationItem.ToString()); // Successfully added
+            configItemService.AddConfigItem(configurationItem);
+            this.Close();
         }
 
         private void ConfigItemForm_Load(object sender, EventArgs e)
@@ -46,8 +47,9 @@ namespace NoSQLProject
                 string name = $"{user.id} {user.firstName} {user.lastName}";
                 comboBoxOwner.AutoCompleteCustomSource.Add(name); // Allows the user to search the combobox by typing
                 comboBoxOwner.Items.Add(name);
-                comboBoxOwner.ValueMember = user.id.ToString();// Stores ID of user for later retrieval
+                comboBoxOwner.ValueMember = user.id.ToString(); // Stores ID of user for later retrieval
             }
+
             comboBoxOwner.EndUpdate();
             comboBoxOwner.SelectedIndex = 0;
 

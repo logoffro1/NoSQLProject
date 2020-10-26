@@ -16,6 +16,7 @@ namespace NoSQLProject
         private void NewConfigItem_Click(object sender, EventArgs e)
         {
             new ConfigItemForm().Show();
+
         }
 
         private void textBoxFilterCI_TextChanged(object sender, EventArgs e)
