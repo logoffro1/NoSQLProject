@@ -52,7 +52,7 @@ namespace DAO
                 {"description", configItem.Description},
                 {"owner", configItem.Owner},
                 {"location", configItem.Location},
-                {"importance", configItem.Importance}
+                {"importance", configItem.Importance},
             };
         }
 

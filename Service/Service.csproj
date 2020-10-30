@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archive_Service.cs" />
     <Compile Include="ConfigurationItem_Service.cs" />
     <Compile Include="Ticket_Service.cs" />
     <Compile Include="User_Service.cs" />

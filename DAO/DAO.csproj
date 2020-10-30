@@ -105,6 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archive_DAO.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="ConfigurationItem_DAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
