@@ -57,6 +57,7 @@
             this.textBoxFilterCI.TabIndex = 1;
             this.textBoxFilterCI.Text = "Filter Items...";
             this.textBoxFilterCI.TextChanged += new System.EventHandler(this.textBoxFilterCI_TextChanged);
+            this.textBoxFilterCI.Click += new System.EventHandler(this.textBoxFilterCI_Click);
             // 
             // listViewConfigurationItems
             // 

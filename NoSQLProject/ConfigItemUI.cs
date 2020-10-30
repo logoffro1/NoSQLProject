@@ -13,6 +13,8 @@ namespace NoSQLProject
             InitializeComponent();
         }
 
+        
+
         private void NewConfigItem_Click(object sender, EventArgs e)
         {
             new ConfigItemForm().Show();
@@ -29,6 +31,14 @@ namespace NoSQLProject
             {
                 textBoxFilterCI.Text = "Filter Items...";
             }*/
+        }
+
+        private void textBoxFilterCI_Click(object sender, EventArgs e)
+        {
+            if (textBoxFilterCI.Text.Equals("Filter Items..."))
+            {
+                textBoxFilterCI.Text = "";
+            }
         }
 
         private void ConfigItemUI_Load(object sender, EventArgs e)
