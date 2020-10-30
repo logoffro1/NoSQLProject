@@ -98,7 +98,7 @@
             this.buttonArchive.Name = "buttonArchive";
             this.buttonArchive.Size = new System.Drawing.Size(107, 56);
             this.buttonArchive.TabIndex = 5;
-            this.buttonArchive.Text = "Archive";
+            this.buttonArchive.Text = "Archive Config Item older 10 days";
             this.buttonArchive.UseVisualStyleBackColor = true;
             this.buttonArchive.Click += new System.EventHandler(this.buttonArchive_Click);
             // 

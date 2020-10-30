@@ -153,7 +153,7 @@ namespace DAO
                 throw new Exception("Can't deleted files less than 10 days old");
             }
 
-            DateTime archiveCutoff = DateTime.Now.AddDays(daysOldArchive);
+            DateTime archiveCutoff = DateTime.Now.AddDays(-daysOldArchive);
 
             var dbArchiveClient = new MongoClient(CONNECTION_STRING_ARCHIVE);
             IMongoDatabase archiveDb = dbArchiveClient.GetDatabase("garden_group_archive");
