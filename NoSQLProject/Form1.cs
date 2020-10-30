@@ -52,5 +52,11 @@ namespace NoSQLProject
             new LoginForm().Show();
             this.Hide();
         }
+
+        private void buttonConfigItem_Click(object sender, EventArgs e)
+        {
+            new ConfigItemUi().Show();
+            this.Hide();
+        }
     }
 }

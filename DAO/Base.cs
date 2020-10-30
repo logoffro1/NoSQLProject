@@ -62,6 +62,24 @@ namespace DAO
            await GetCollection(collectionName).UpdateOneAsync(filter, update);
 
         }
+
+        protected async void UpdateDocument(string collectionName, string idColumnName, string id, string columnToChange, string newString)//updates a document in the DB (changes a string) with string ID
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq(idColumnName, id);
+            var update = Builders<BsonDocument>.Update.Set(columnToChange, newString);
+
+            await GetCollection(collectionName).UpdateOneAsync(filter, update);
+
+        }
+
+        protected async void UpdateDocument(string collectionName, string idColumnName, string id, string columnToChange, int newId) //updates a document in the DB (changes an int)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq(idColumnName, id);
+            var update = Builders<BsonDocument>.Update.Set(columnToChange, newId);
+
+            await GetCollection(collectionName).UpdateOneAsync(filter, update);
+
+        }
         protected async void DeleteDocument(string collectionName, string columnName, int id) // deletes document from the specified collectiion
         {
             var deleteFilter = Builders<BsonDocument>.Filter.Eq(columnName, id);
@@ -80,6 +98,11 @@ namespace DAO
             
         }
 
-
+        protected void ArchiveDataBase(DateTime date)
+        {
+            //database.GetCollection<BsonDocument>("configitemdb");
+           // database.ListCollections();
+            //database.GetCollection<BsonDocument>().BulkWrite().
+        }
     }
 }
