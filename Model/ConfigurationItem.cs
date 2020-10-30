@@ -10,7 +10,7 @@ namespace Model
 
         public string Description { get; set; }
 
-        public int Owner { get; } // Should be a User?
+        public int Owner { get; set; } // Should be a User?
 
         public string Location { get; set; }
 

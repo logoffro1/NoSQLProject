@@ -29,7 +29,8 @@ namespace DAO
 
         public void UpdateConfigItem(ConfigurationItem configItem)
         {
-            throw new NotImplementedException();
+            UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "name", configItem.Name);
+
         }
 
         public List<ConfigurationItem> GetConfigItemsByLocation(string location)

@@ -2,67 +2,80 @@
 using Service;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace NoSQLProject
 {
     public partial class ConfigItemUi : Form
     {
+        BindingSource bindingSource = new BindingSource();
+
+
         public ConfigItemUi()
         {
             InitializeComponent();
         }
 
-        
-
         private void NewConfigItem_Click(object sender, EventArgs e)
         {
             new ConfigItemForm().Show();
-
         }
 
         private void textBoxFilterCI_TextChanged(object sender, EventArgs e)
         {
-            /*if (textBoxFilterCI.Text.Equals("Filter Items..."))
+            /*try
             {
-                textBoxFilterCI.Text = "";
+                string search = textBoxFilterCI.Text;
+                (bindingSource.DataSource as DataTable).DefaultView.RowFilter = $"name LIKE %'{search}'% " +
+                    $"OR ID LIKE %'{search}'% OR" +
+                    $"OR Description LIKE %'{search}'% OR" +
+                    $"OR Location LIKE %'{search}'% OR" +
+                    $"OR Importance LIKE %'{search}'% OR" +
+                    $"OR Owner LIKE %'{search}'%";
             }
-            else if (textBoxFilterCI.Text.Equals(""))
+            catch (Exception exception)
             {
-                textBoxFilterCI.Text = "Filter Items...";
+                Console.WriteLine(exception);
+                throw;
             }*/
         }
 
         private void textBoxFilterCI_Click(object sender, EventArgs e)
         {
-            if (textBoxFilterCI.Text.Equals("Filter Items..."))
-            {
-                textBoxFilterCI.Text = "";
-            }
+            if (textBoxFilterCI.Text.Equals("Filter Items...")) textBoxFilterCI.Text = "";
         }
 
         private void ConfigItemUI_Load(object sender, EventArgs e)
         {
-            var ciService = new ConfigurationItem_Service();
+            UpdateList();
+            textBoxFilterCI.Visible = false;
+        }
 
-            List<ConfigurationItem> configItems = ciService.GetAllConfigItems();
-            listViewConfigurationItems.BeginUpdate();
-            foreach (ConfigurationItem configurationItem in configItems)
+
+        private void buttonEditConfigItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewConfigItem.SelectedRows.Count > 0)
             {
-                ListViewItem lvi = new ListViewItem(new string[]
-                {
-                    configurationItem.ID,
-                    configurationItem.Name,
-                    configurationItem.Description,
-                    configurationItem.Owner.ToString(),
-                    configurationItem.Location,
-                    configurationItem.Importance.ToString()
-                });
-                //MessageBox.Show(configurationItem.ToString());
-                listViewConfigurationItems.Items.Add(lvi);
+                new ConfigItemForm((ConfigurationItem) dataGridViewConfigItem.SelectedRows[0].DataBoundItem).Show();
+                UpdateList();
+            }
+            else
+            {
+                MessageBox.Show("You must select a configuration item to edit");
+            }
+        }
+
+        private void UpdateList()
+        {
+            bindingSource.Clear();
+            var ciService = new ConfigurationItem_Service();
+            foreach (var configItem in ciService.GetAllConfigItems())
+            {
+                bindingSource.Add(configItem);
             }
 
-            listViewConfigurationItems.EndUpdate();
+            dataGridViewConfigItem.DataSource = bindingSource;
         }
     }
 }

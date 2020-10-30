@@ -16,31 +16,64 @@ namespace NoSQLProject
     public partial class ConfigItemForm : Form
     {
         ConfigurationItem_Service configItemService = new ConfigurationItem_Service();
+        private ConfigurationItem ci;
 
         public ConfigItemForm()
         {
             InitializeComponent();
         }
 
+        public ConfigItemForm(ConfigurationItem ci)
+        {
+            this.ci = ci;
+            InitializeComponent();
+        }
+
         private void buttonAddConfigItem_Click(object sender, EventArgs e)
         {
-            String name = textBoxCIName.Text;
-            String description = textBoxCIDescription.Text;
-            int owner = int.Parse(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]);
-            MessageBox.Show(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]); // Doesn't Work
-            String location = textBoxLocation.Text;
-            TicketPriorityType importance = (TicketPriorityType) comboBoxImportance.SelectedItem;
-            ConfigurationItem configurationItem = new ConfigurationItem(name, description, owner, location, importance); 
-            //MessageBox.Show(configurationItem.ToString()); // Successfully added
-            configItemService.AddConfigItem(configurationItem);
+            if (textBoxCIName.Text.Equals("") || textBoxCIDescription.Text.Equals("") ||
+                comboBoxOwner.SelectedItem == null || textBoxLocation.Text.Equals("") ||
+                comboBoxImportance.SelectedItem == null)
+            {
+                MessageBox.Show("All fields must be filled");
+                return;
+            }
+
+            if (ci == null)
+            {
+                ci = new ConfigurationItem(textBoxCIName.Text, textBoxCIDescription.Text,
+                    int.Parse(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]),
+                    textBoxLocation.Text,
+                    (TicketPriorityType) comboBoxImportance.SelectedIndex);
+            }
+            else
+            {
+                ci.Name = textBoxCIName.Text;
+                ci.Description = textBoxCIDescription.Text;
+                ci.Owner = int.Parse(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]);
+                ci.Location = textBoxLocation.Text;
+                ci.Importance = (TicketPriorityType) comboBoxImportance.SelectedIndex;
+            }
+
+
+            if (buttonAddConfigItem.Text.Equals("Update"))
+            {
+                configItemService.UpdateConfigItem(ci);
+            }
+            else
+            {
+                configItemService.AddConfigItem(ci);
+            }
+
+            MessageBox.Show($"Configuration Item Added\n{ci.ToString()}"); // Successfully added
             this.Close();
         }
 
         private void ConfigItemForm_Load(object sender, EventArgs e)
         {
-            //MessageBox.Show(sender.ToString());
             User_Service userService = new User_Service();
             List<User> userList = userService.getAllUsers();
+
             comboBoxOwner.BeginUpdate();
             foreach (User user in userList)
             {
@@ -57,6 +90,22 @@ namespace NoSQLProject
             comboBoxImportance.Items.Add(TicketPriorityType.Normal);
             comboBoxImportance.Items.Add(TicketPriorityType.High);
             comboBoxImportance.SelectedIndex = 0;
+
+            if (ci != null)
+            {
+                buttonAddConfigItem.Text = "Update";
+                this.Text = "Edit Configuration Item";
+                textBoxCIDescription.Text = ci.Description;
+                textBoxCIName.Text = ci.Name;
+                textBoxLocation.Text = ci.Location;
+                comboBoxImportance.SelectedIndex = (int) ci.Importance;
+                comboBoxOwner.SelectedIndex = ci.Owner;
+            }
+            else
+            {
+                buttonAddConfigItem.Text = "Add";
+                this.Text = "Ädd New Configuration Item";
+            }
         }
     }
 }

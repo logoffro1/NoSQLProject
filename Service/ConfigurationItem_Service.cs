@@ -37,9 +37,9 @@ namespace Service
             return ConfigurationItemDAO.GetConfigItemsByLocation(location);
         }
 
-        public List<ConfigurationItem> GetConfigItemsByImportance(TicketPriorityType Importance)
+        public List<ConfigurationItem> GetConfigItemsByImportance(TicketPriorityType importance)
         {
-            return ConfigurationItemDAO.GetConfigItemsByImportance(Importance);
+            return ConfigurationItemDAO.GetConfigItemsByImportance(importance);
         }
     }
 }
