@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.btnUserManagement = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -38,9 +39,9 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 55);
+            this.button1.Size = new System.Drawing.Size(143, 68);
             this.button1.TabIndex = 0;
             this.button1.Text = "Ticket overview (temp)";
             this.button1.UseVisualStyleBackColor = true;
@@ -48,10 +49,10 @@
             // 
             // btnUserManagement
             // 
-            this.btnUserManagement.Location = new System.Drawing.Point(112, 0);
-            this.btnUserManagement.Margin = new System.Windows.Forms.Padding(2);
+            this.btnUserManagement.Location = new System.Drawing.Point(149, 0);
+            this.btnUserManagement.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnUserManagement.Name = "btnUserManagement";
-            this.btnUserManagement.Size = new System.Drawing.Size(107, 55);
+            this.btnUserManagement.Size = new System.Drawing.Size(143, 68);
             this.btnUserManagement.TabIndex = 1;
             this.btnUserManagement.Text = "User overview (temp)";
             this.btnUserManagement.UseVisualStyleBackColor = true;
@@ -59,10 +60,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(223, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Location = new System.Drawing.Point(297, 0);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 55);
+            this.button2.Size = new System.Drawing.Size(143, 68);
             this.button2.TabIndex = 2;
             this.button2.Text = "Dashboard (temp)";
             this.button2.UseVisualStyleBackColor = true;
@@ -70,10 +71,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(334, 0);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Location = new System.Drawing.Point(445, 0);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 55);
+            this.button3.Size = new System.Drawing.Size(143, 68);
             this.button3.TabIndex = 3;
             this.button3.Text = "Login (temp)";
             this.button3.UseVisualStyleBackColor = true;
@@ -92,7 +93,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 366);
             this.Controls.Add(this.buttonConfigItem);
@@ -100,7 +101,8 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnUserManagement);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

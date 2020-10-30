@@ -8,6 +8,7 @@ using System.Drawing.Design;
 using System.Xml;
 using System.CodeDom.Compiler;
 using System.Diagnostics;
+using MongoDB.Bson.Serialization.Conventions;
 
 namespace NoSQLProject
 {
@@ -27,10 +28,7 @@ namespace NoSQLProject
             listViewTickets.Items.Clear();
 
             foreach (ListViewItem item in GetFullListView().Items)
-            {
-
                 listViewTickets.Items.Add((ListViewItem)item.Clone());
-            }
 
             ColorListRows();
             listViewTickets.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -53,7 +51,7 @@ namespace NoSQLProject
             }
             return tempList;
         }
-        private void ColorListRows() //color the status column/row
+        private void ColorListRows() //color the status column
         {
             foreach (ListViewItem item in listViewTickets.Items)
             {
@@ -77,10 +75,21 @@ namespace NoSQLProject
         {
             LoadListView();
             txtFilter.ForeColor = Color.Gray;
+
+            ShowSearchToolTip();
+        }
+        private void ShowSearchToolTip()
+        {
+            ToolTip test = new ToolTip();
+            string tooltipText = "Examples:\n(single word) Cosmin\n(AND) Cosmin & Software\n(OR) Cosmin | Egehan";
+            test.SetToolTip(picInfo, tooltipText);
+            test.Active = true;
+            test.ShowAlways = true;
+            test.InitialDelay = 0;
         }
         private void RemovePlaceholderText()
         {
-            if (txtFilter.Text.Equals("Filter list..."))
+            if (txtFilter.Text.Equals("Search list..."))
             {
                 txtFilter.Text = "";
                 txtFilter.ForeColor = Color.Black;
@@ -91,7 +100,7 @@ namespace NoSQLProject
         {
             if (string.IsNullOrWhiteSpace(txtFilter.Text))
             {
-                txtFilter.Text = "Filter list...";
+                txtFilter.Text = "Search list...";
                 txtFilter.ForeColor = Color.Gray;
             }
 
@@ -111,6 +120,7 @@ namespace NoSQLProject
         {
             if (listViewTickets.SelectedItems.Count > 0)
             {
+                listViewTickets.SelectedItems[0].Checked = !listViewTickets.SelectedItems[0].Checked;
                 Ticket ticket = GetTicketById(int.Parse(listViewTickets.SelectedItems[0].Text));
                 new TicketInfoForm(ticket).ShowDialog();
             }
@@ -124,6 +134,13 @@ namespace NoSQLProject
                 {
                     Ticket ticket = GetTicketById(int.Parse(item.SubItems[0].Text));
                     ticket.IsOpen = !ticket.IsOpen;
+                    if (!ticket.IsOpen)
+                    {
+                        User_Service userService = new User_Service();
+                        ticket.ReportedByUser.nrTickets--;
+                        userService.UpdateUserTickets(ticket.ReportedByUser);
+                    }
+
                     ticketService.UpdateTicket(ticket);
                     LoadListView();
                 }
@@ -141,32 +158,13 @@ namespace NoSQLProject
         {
             AddPlaceholderText();
         }
-        private void FilterList()
-        {
-            string filter = txtFilter.Text;
-            List<ListViewItem> items = new List<ListViewItem>();
-            foreach (ListViewItem item in GetFullListView().Items)
-            {
-                for (int i = 0; i < item.SubItems.Count; i++)
-                    if (item.SubItems[i].Text.ToLower().Contains(filter.ToLower()))
-                    {
-                        items.Add(item);
-                        break;
-                    }
-            }
-
-            listViewTickets.Items.Clear();
-            foreach (ListViewItem item in items)
-                listViewTickets.Items.Add((ListViewItem)item.Clone());
-
-            ColorListRows();
-
-        }
-
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
-            if (txtFilter.Text != "Filter list...")
-                FilterList();
+            if (txtFilter.Text != "Search list...")
+            {
+                new SearchTickets(txtFilter, listViewTickets, GetFullListView());
+                ColorListRows();
+            }
         }
     }
 }

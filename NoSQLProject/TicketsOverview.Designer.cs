@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TicketsOverview));
             this.listViewTickets = new System.Windows.Forms.ListView();
             this.idColumnn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.subjectColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,6 +42,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnChangeStatus = new System.Windows.Forms.Button();
             this.txtFilter = new System.Windows.Forms.TextBox();
+            this.picInfo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewTickets
@@ -57,9 +60,9 @@
             this.listViewTickets.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewTickets.FullRowSelect = true;
             this.listViewTickets.HideSelection = false;
-            listViewItem8.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.listViewTickets.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem8});
+            listViewItem2});
             this.listViewTickets.Location = new System.Drawing.Point(18, 119);
             this.listViewTickets.Name = "listViewTickets";
             this.listViewTickets.Size = new System.Drawing.Size(657, 362);
@@ -135,10 +138,21 @@
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(193, 34);
             this.txtFilter.TabIndex = 4;
-            this.txtFilter.Text = "Filter list...";
+            this.txtFilter.Text = "Search list...";
             this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
             this.txtFilter.Enter += new System.EventHandler(this.txtFilter_Enter);
             this.txtFilter.Leave += new System.EventHandler(this.txtFilter_Leave);
+            // 
+            // picInfo
+            // 
+            this.picInfo.BackgroundImage = global::NoSQLProject.Properties.Resources.Info_64;
+            this.picInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picInfo.Cursor = System.Windows.Forms.Cursors.Help;
+            this.picInfo.Location = new System.Drawing.Point(437, 502);
+            this.picInfo.Name = "picInfo";
+            this.picInfo.Size = new System.Drawing.Size(39, 34);
+            this.picInfo.TabIndex = 5;
+            this.picInfo.TabStop = false;
             // 
             // TicketsOverview
             // 
@@ -146,18 +160,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(723, 557);
+            this.Controls.Add(this.picInfo);
             this.Controls.Add(this.txtFilter);
             this.Controls.Add(this.btnChangeStatus);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCreateTicket);
             this.Controls.Add(this.listViewTickets);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "TicketsOverview";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TicketsOverview";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TicketsOverview_FormClosing);
             this.Load += new System.EventHandler(this.TicketsOverview_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.picInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,5 +194,6 @@
         private System.Windows.Forms.ColumnHeader statusColumn;
         private System.Windows.Forms.Button btnChangeStatus;
         private System.Windows.Forms.TextBox txtFilter;
+        private System.Windows.Forms.PictureBox picInfo;
     }
 }
