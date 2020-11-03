@@ -9,7 +9,7 @@ namespace NoSQLProject
 {
     public partial class ConfigItemUi : Form
     {
-        BindingSource bindingSource = new BindingSource();
+        private BindingSource bindingSource = new BindingSource();
 
 
         public ConfigItemUi()
@@ -24,21 +24,7 @@ namespace NoSQLProject
 
         private void textBoxFilterCI_TextChanged(object sender, EventArgs e)
         {
-            /*try
-            {
-                string search = textBoxFilterCI.Text;
-                (bindingSource.DataSource as DataTable).DefaultView.RowFilter = $"name LIKE %'{search}'% " +
-                    $"OR ID LIKE %'{search}'% OR" +
-                    $"OR Description LIKE %'{search}'% OR" +
-                    $"OR Location LIKE %'{search}'% OR" +
-                    $"OR Importance LIKE %'{search}'% OR" +
-                    $"OR Owner LIKE %'{search}'%";
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw;
-            }*/
+
         }
 
         private void textBoxFilterCI_Click(object sender, EventArgs e)
@@ -57,8 +43,8 @@ namespace NoSQLProject
         {
             if (dataGridViewConfigItem.SelectedRows.Count > 0)
             {
+                //MessageBox.Show(dataGridViewConfigItem.SelectedRows[0].DataBoundItem.ToString());
                 new ConfigItemForm((ConfigurationItem) dataGridViewConfigItem.SelectedRows[0].DataBoundItem).Show();
-                UpdateList();
             }
             else
             {
@@ -66,7 +52,7 @@ namespace NoSQLProject
             }
         }
 
-        private void UpdateList()
+        public void UpdateList()
         {
             bindingSource.Clear();
             var ciService = new ConfigurationItem_Service();
@@ -74,8 +60,12 @@ namespace NoSQLProject
             {
                 bindingSource.Add(configItem);
             }
-
             dataGridViewConfigItem.DataSource = bindingSource;
+        }
+
+        private void dataGridViewConfigItem_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
