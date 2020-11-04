@@ -43,7 +43,6 @@ namespace DAO
         {
             UpdateDocument(collectionName, "ticket_id", newTicket.Id, "user_id", newTicket.ReportedByUser.id);
         }
-
         private BsonDocument CreateTicketDocument(Ticket ticket)
         {
             return new BsonDocument
