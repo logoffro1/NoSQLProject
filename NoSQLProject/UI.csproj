@@ -131,6 +131,12 @@
     <Compile Include="AddUserWindow.Designer.cs">
       <DependentUpon>AddUserWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Archive_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Archive_View.Designer.cs">
+      <DependentUpon>Archive_View.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigItemUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddUserWindow.resx">
       <DependentUpon>AddUserWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Archive_View.resx">
+      <DependentUpon>Archive_View.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfigItemForm.resx">
       <DependentUpon>ConfigItemForm.cs</DependentUpon>

@@ -56,8 +56,8 @@ namespace NoSQLProject
 
         private void buttonArchive_Click(object sender, EventArgs e)
         {
-            Archive_Service archiveService = new Archive_Service();
-            archiveService.ArchiveConfigItemDatabase(10);
+            new Archive_View().Show();
+            this.Hide();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace DAO
         private MongoClient dbClient;
         private IMongoDatabase database;
         private MongoClient dbArchiveClient;
-        IMongoDatabase archiveDb;
+        private IMongoDatabase archiveDb;
 
         public Base()
         {
@@ -41,7 +41,7 @@ namespace DAO
         {
             try
             {
-                dbClient = new MongoClient(CONNECTION_STRING_ARCHIVE);
+                dbArchiveClient = new MongoClient(CONNECTION_STRING_ARCHIVE);
                 dbArchiveClient.GetDatabase("garden_group_archive");
             }
             catch (Exception e)
@@ -159,6 +159,16 @@ namespace DAO
                 DateTime.Now);
         }
 
+        private IMongoCollection<BsonDocument>
+            GetArchiveCollection(string collectionName) //gets the specified collection(table) from the Archive DB
+        {
+            return archiveDb.GetCollection<BsonDocument>(collectionName);
+        }
+
+        protected List<BsonDocument> ReadDocumentsArchive(string collectionName) //reads an entire collection from the DB
+        {
+            return GetArchiveCollection(collectionName).Find(new BsonDocument()).ToList();
+        }
 
         protected void ArchiveDatabase(string collectionName, string collectionUniqueIdName, int daysOldArchive)
         {
@@ -192,7 +202,7 @@ namespace DAO
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
-                        throw new Exception("Different named ID field");
+                        throw new Exception($"ID Field named {collectionUniqueIdName} was not found in collection {collectionName}");
                     }
                 }
             }

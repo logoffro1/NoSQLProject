@@ -2,8 +2,6 @@
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace DAO
 {
@@ -33,7 +31,7 @@ namespace DAO
             UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "description", configItem.Description);
             UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "owner", configItem.Owner);
             UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "location", configItem.Location);
-            UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "importance", (int)configItem.Importance);
+            UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "importance", (int) configItem.Importance);
         }
 
         public List<ConfigurationItem> GetConfigItemsByLocation(string location)
@@ -78,6 +76,12 @@ namespace DAO
             }
 
             return configurationItems;
+        }
+
+        public List<ConfigurationItem> GetAllArchivedConfigItems()
+        {
+            List<BsonDocument> docsList = ReadDocumentsArchive(COLLECTION_NAME);
+            return CreateConfigurationItems(docsList);
         }
     }
 }
