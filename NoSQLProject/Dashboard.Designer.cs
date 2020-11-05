@@ -301,6 +301,7 @@
             this.btnArchive.TabIndex = 16;
             this.btnArchive.Text = "Archive Database";
             this.btnArchive.UseVisualStyleBackColor = false;
+            this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
             // 
             // archivedItemsViewToolStripMenuItem
             // 

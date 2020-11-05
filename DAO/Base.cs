@@ -43,7 +43,7 @@ namespace DAO
             try
             {
                 dbArchiveClient = new MongoClient(CONNECTION_STRING_ARCHIVE);
-                dbArchiveClient.GetDatabase("garden_group_archive");
+                archiveDb = dbArchiveClient.GetDatabase("garden_group_archive");
             }
             catch (Exception e)
             {
@@ -184,7 +184,7 @@ namespace DAO
 
             foreach (BsonDocument bsonDoc in collection)
             {
-                DateTime updated = (DateTime) bsonDoc["updated_on"];;
+                DateTime updated = (DateTime) bsonDoc["updated_on"];
 
                 if (DateTime.Compare(updated, archiveCutoff) == -1)
                 {
@@ -194,11 +194,16 @@ namespace DAO
                     {
                         if (!bsonDoc[collectionUniqueIdName].IsBsonNull)
                         {
-                            id = (string) bsonDoc[collectionUniqueIdName];
+                            id = bsonDoc[collectionUniqueIdName].ToString();
                         }
 
+                        if (collectionName == "tickets" && bsonDoc["status"] == "Open")
+                        {
+                            continue;
+                        }
                         archiveDb.GetCollection<BsonDocument>(collectionName).InsertOne(bsonDoc);
                         DeleteDocument(collectionName, collectionUniqueIdName, id);
+
                     }
                     catch (Exception e)
                     {
