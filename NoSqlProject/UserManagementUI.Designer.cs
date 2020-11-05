@@ -41,11 +41,16 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ticketsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurationItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(607, 28);
+            this.btnAdd.Location = new System.Drawing.Point(607, 60);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(181, 48);
             this.btnAdd.TabIndex = 1;
@@ -63,7 +68,7 @@
             this.Tickets});
             this.userView.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userView.HideSelection = false;
-            this.userView.Location = new System.Drawing.Point(12, 89);
+            this.userView.Location = new System.Drawing.Point(12, 121);
             this.userView.Name = "userView";
             this.userView.Size = new System.Drawing.Size(776, 349);
             this.userView.TabIndex = 2;
@@ -98,7 +103,7 @@
             // 
             this.lbl.AutoSize = true;
             this.lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl.Location = new System.Drawing.Point(28, 52);
+            this.lbl.Location = new System.Drawing.Point(28, 84);
             this.lbl.Name = "lbl";
             this.lbl.Size = new System.Drawing.Size(99, 20);
             this.lbl.TabIndex = 3;
@@ -107,14 +112,14 @@
             // cmbType
             // 
             this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(138, 52);
+            this.cmbType.Location = new System.Drawing.Point(138, 84);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(121, 24);
             this.cmbType.TabIndex = 4;
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(138, 12);
+            this.txtSearch.Location = new System.Drawing.Point(138, 44);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(121, 22);
             this.txtSearch.TabIndex = 5;
@@ -124,7 +129,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 12);
+            this.label1.Location = new System.Drawing.Point(28, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 20);
             this.label1.TabIndex = 6;
@@ -132,7 +137,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(404, 28);
+            this.btnBack.Location = new System.Drawing.Point(404, 60);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(181, 48);
             this.btnBack.TabIndex = 7;
@@ -140,11 +145,44 @@
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ticketsOverviewToolStripMenuItem,
+            this.usersOverviewToolStripMenuItem,
+            this.configurationItemsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ticketsOverviewToolStripMenuItem
+            // 
+            this.ticketsOverviewToolStripMenuItem.Name = "ticketsOverviewToolStripMenuItem";
+            this.ticketsOverviewToolStripMenuItem.Size = new System.Drawing.Size(96, 24);
+            this.ticketsOverviewToolStripMenuItem.Text = "Dashboard";
+           
+            // 
+            // usersOverviewToolStripMenuItem
+            // 
+            this.usersOverviewToolStripMenuItem.Name = "usersOverviewToolStripMenuItem";
+            this.usersOverviewToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
+            this.usersOverviewToolStripMenuItem.Text = "Tickets Overview";
+            // 
+            // configurationItemsToolStripMenuItem
+            // 
+            this.configurationItemsToolStripMenuItem.Name = "configurationItemsToolStripMenuItem";
+            this.configurationItemsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
+            this.configurationItemsToolStripMenuItem.Text = "Configuration Items";
+            // 
             // UserManagementUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 487);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
@@ -157,6 +195,8 @@
             this.Text = "UserManagementUI";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserManagementUI_FormClosing);
             this.Load += new System.EventHandler(this.UserManagementUI_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,5 +215,9 @@
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ticketsOverviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usersOverviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configurationItemsToolStripMenuItem;
     }
 }
