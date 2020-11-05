@@ -36,7 +36,6 @@
             this.lblLowPriorityTickets = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblUrgentTickets = new System.Windows.Forms.Label();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDateTime = new System.Windows.Forms.Label();
@@ -48,6 +47,7 @@
             this.btnGeneral = new System.Windows.Forms.Button();
             this.btnPersonal = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlGeneral.SuspendLayout();
             this.pnlPersonal.SuspendLayout();
             this.SuspendLayout();
@@ -118,19 +118,6 @@
             this.lblUrgentTickets.TabIndex = 5;
             this.lblUrgentTickets.Text = "_____";
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(109)))), ((int)(((byte)(118)))));
-            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.btnRefresh.Location = new System.Drawing.Point(480, 268);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(0);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(88, 29);
-            this.btnRefresh.TabIndex = 6;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
@@ -167,7 +154,6 @@
             this.pnlGeneral.Controls.Add(this.lblLowPriorityTickets);
             this.pnlGeneral.Controls.Add(this.label2);
             this.pnlGeneral.Controls.Add(this.lblUrgentTickets);
-            this.pnlGeneral.Controls.Add(this.btnRefresh);
             this.pnlGeneral.Controls.Add(this.lblStatus);
             this.pnlGeneral.Location = new System.Drawing.Point(15, 46);
             this.pnlGeneral.Name = "pnlGeneral";
@@ -217,6 +203,7 @@
             this.listViewTicket.TabIndex = 0;
             this.listViewTicket.UseCompatibleStateImageBehavior = false;
             this.listViewTicket.View = System.Windows.Forms.View.Details;
+            this.listViewTicket.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewTicket_ColumnClick);
             this.listViewTicket.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewTicket_MouseDoubleClick);
             // 
             // btnGeneral
@@ -250,6 +237,18 @@
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(109)))), ((int)(((byte)(118)))));
+            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.btnRefresh.Location = new System.Drawing.Point(268, 10);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(88, 29);
+            this.btnRefresh.TabIndex = 14;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +256,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnPersonal);
             this.Controls.Add(this.btnGeneral);
@@ -286,7 +286,6 @@
         private System.Windows.Forms.Label lblLowPriorityTickets;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblUrgentTickets;
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lblDateTime;
@@ -298,5 +297,6 @@
         private System.Windows.Forms.ListView listViewTicket;
         private System.Windows.Forms.Label lblPersonalTicketInfo;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
