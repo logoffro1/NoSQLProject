@@ -49,7 +49,7 @@ namespace NoSQLProject
                 }
                 catch(Exception exception)
                 {
-                    Console.WriteLine(exception.Message);
+                    MessageBox.Show("Something went wrong", "Error", MessageBoxButtons.OK);
                 }
 
                 MessageBox.Show($"{newUser.firstName} {newUser.lastName} is added as a new user.","Welcome aboard!!",MessageBoxButtons.OK,MessageBoxIcon.Information);

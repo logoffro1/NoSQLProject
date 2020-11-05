@@ -25,8 +25,8 @@ namespace NoSQLProject
 
         public ConfigItemForm(ConfigurationItem ci)
         {
-            this.ci = ci;
             InitializeComponent();
+            this.ci = ci;
         }
 
         private void buttonAddConfigItem_Click(object sender, EventArgs e)
@@ -66,6 +66,8 @@ namespace NoSQLProject
             }
 
             MessageBox.Show($"Configuration Item Added\n{ci.ToString()}"); // Successfully added
+            ConfigItemUi ciForm = (ConfigItemUi) Application.OpenForms["ConfigItemUI"];
+            ciForm.UpdateList();
             this.Close();
         }
 

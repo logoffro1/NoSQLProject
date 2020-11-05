@@ -8,9 +8,9 @@ namespace DAO
 {
     public class Archive_DAO : Base
     {
-        public void ArchiveDatabase(string collectionName, int daysOldArchive)
+        public void ArchiveDatabase(string collectionName, string collectionUniqueID, int daysOldArchive)
         {
-            base.ArchiveDatabase(collectionName, daysOldArchive);
+            base.ArchiveDatabase(collectionName, collectionUniqueID, daysOldArchive);
         }
     }
 }

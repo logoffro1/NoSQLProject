@@ -30,7 +30,10 @@ namespace DAO
         public void UpdateConfigItem(ConfigurationItem configItem)
         {
             UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "name", configItem.Name);
-
+            UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "description", configItem.Description);
+            UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "owner", configItem.Owner);
+            UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "location", configItem.Location);
+            UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "importance", (int)configItem.Importance);
         }
 
         public List<ConfigurationItem> GetConfigItemsByLocation(string location)

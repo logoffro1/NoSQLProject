@@ -49,16 +49,14 @@ namespace DAO
 
             foreach (BsonDocument doc in users)
             {
-                BsonValue element = doc.GetValue("username");
-                if (element.AsString.ToLower().Equals(username.ToLower()))
+                if (doc["username"].AsString.ToLower().Equals(username.ToLower()))
                     return true;
             }
 
             return false;
         }
         public User GetUserByName(string username)
-        {
-           
+        {           
             List<User> users = getAllUsers();
             foreach (User user in users)
             {
@@ -68,12 +66,7 @@ namespace DAO
                 }
                     
             }
-            return new User //this is unreachable
-            {
-               id = 0
-            };
-
-
+            return null;                                  
         }
         private BsonDocument CreateUserDocument(User user)
         {
@@ -92,17 +85,20 @@ namespace DAO
         public User GetUserById(int id)
         {
             var userDoc = ReadDocument("users", "user_id", id);
+            if(userDoc != null)
+                return new User
+                {
+                    id = (int)userDoc["user_id"],
+                    username = (string)userDoc["username"],
+                    password = (string)userDoc["password"],
+                    firstName = (string)userDoc["firstName"],
+                    lastName = (string)userDoc["lastName"],
+                    email = (string)userDoc["email"],
+                    nrTickets = (int)userDoc["tickets"]
+                };
 
-            return new User
-            {
-                id = (int)userDoc["user_id"],
-                username = (string)userDoc["username"],
-                password = (string)userDoc["password"],
-                firstName = (string)userDoc["firstName"],
-                lastName = (string)userDoc["lastName"],
-                email = (string)userDoc["email"],
-                nrTickets = (int)userDoc["tickets"]
-            };
+            return null;
+
         }
         //Written by Cosmin Ilie: Updates the user's number of tickets
         public void UpdateUserTickets(User newUser)

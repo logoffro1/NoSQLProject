@@ -28,6 +28,22 @@ namespace DAO
                     Description = (string)doc["description"],
                     Deadline = (DateTime)(doc["deadline"])
                 };
+                User user = ticket.ReportedByUser;
+                if (user == null)
+                {
+                    user = new User
+                    {
+                        id = 99999,
+                        username = "unavailable",
+                        password = "unavailable",
+                        firstName = "unavailable",
+                        lastName = "unavailable",
+                        email = "unavailable",
+                        nrTickets = 0
+                    };
+
+                }
+                ticket.ReportedByUser = user;
                 ticket.IsOpen = ticket.SetStatus((string)doc["status"]);
                 tickets.Add(ticket);
             }
@@ -43,7 +59,6 @@ namespace DAO
         {
             UpdateDocument(collectionName, "ticket_id", newTicket.Id, "user_id", newTicket.ReportedByUser.id);
         }
-
         private BsonDocument CreateTicketDocument(Ticket ticket)
         {
             return new BsonDocument

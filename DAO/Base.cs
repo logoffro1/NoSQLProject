@@ -17,6 +17,8 @@ namespace DAO
 
         private MongoClient dbClient;
         private IMongoDatabase database;
+        private MongoClient dbArchiveClient;
+        IMongoDatabase archiveDb;
 
         public Base()
         {
@@ -29,6 +31,18 @@ namespace DAO
             try
             {
                 dbClient = new MongoClient(CONNECTION_STRING);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.ToString());
+            }
+        }
+        private void ConnectToArchiveDB()
+        {
+            try
+            {
+                dbClient = new MongoClient(CONNECTION_STRING_ARCHIVE);
+                dbArchiveClient.GetDatabase("garden_group_archive");
             }
             catch (Exception e)
             {
@@ -146,7 +160,7 @@ namespace DAO
         }
 
 
-        protected void ArchiveDatabase(string collectionName, int daysOldArchive)
+        protected void ArchiveDatabase(string collectionName, string collectionUniqueIdName, int daysOldArchive)
         {
             if (daysOldArchive < 10)
             {
@@ -154,48 +168,34 @@ namespace DAO
             }
 
             DateTime archiveCutoff = DateTime.Now.AddDays(-daysOldArchive);
-
-            var dbArchiveClient = new MongoClient(CONNECTION_STRING_ARCHIVE);
-            IMongoDatabase archiveDb = dbArchiveClient.GetDatabase("garden_group_archive");
-
             var collection = ReadDocuments(collectionName); // Main Collection
-            //var archiveCollection = archiveDb.GetCollection<BsonDocument>(collectionName).Find(new BsonDocument()).ToList(); // Archive collection
+
 
             foreach (BsonDocument bsonDoc in collection)
             {
-                DateTime updated = (DateTime) bsonDoc["updated_on"];
+                DateTime updated = (DateTime) bsonDoc["updated_on"];;
+
                 if (DateTime.Compare(updated, archiveCutoff) == -1)
                 {
-                    string columnName;
-                    string id;
-                    if ((string) bsonDoc["CI_ID"] != null) // 
-                    {
-                        id = (string) bsonDoc["CI_ID"];
-                        columnName = "CI_ID";
-                    }
-                    else if ((string) bsonDoc["ticket_id"] != null)
-                    {
-                        id = (string) bsonDoc["ticket_id"];
-                        columnName = "ticket_id";
-                    }
-                    else if ((string) bsonDoc["user_id"] != null)
-                    {
-                        id = (string) bsonDoc["user_id"];
-                        columnName = "user_id";
-                    }
-                    else
-                    {
-                        throw new Exception("Different ID");
-                    }
+                    string id = "";
 
+                    try
+                    {
+                        if (!bsonDoc[collectionUniqueIdName].IsBsonNull)
+                        {
+                            id = (string) bsonDoc[collectionUniqueIdName];
+                        }
 
-                    archiveDb.GetCollection<BsonDocument>(collectionName).InsertOne(bsonDoc);
-                    DeleteDocument(collectionName, columnName, id);
+                        archiveDb.GetCollection<BsonDocument>(collectionName).InsertOne(bsonDoc);
+                        DeleteDocument(collectionName, collectionUniqueIdName, id);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw new Exception("Different named ID field");
+                    }
                 }
             }
-
-
-            var Filter = Builders<BsonDocument>.Filter.Lte("updated_at", DateTime.Now.AddDays(-daysOldArchive));
         }
     }
 }

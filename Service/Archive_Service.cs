@@ -11,14 +11,19 @@ namespace Service
     {
         private Archive_DAO archiveDao = new Archive_DAO();
 
-        public void ArchiveConfigItemDatabase()
+        public void ArchiveConfigItemDatabase(int archiveOlderThanDays)
         {
-            archiveDao.ArchiveDatabase("configitemdb", 10);
+            archiveDao.ArchiveDatabase("configitemdb", "CI_ID", archiveOlderThanDays);
         }
 
+        public void ArchiveUserDatabase(int archiveOlderThanDays)
+        {
+            archiveDao.ArchiveDatabase("users", "user_id", archiveOlderThanDays);
+        }
 
-
+        public void ArchiveTicketDatabase(int archiveOlderThanDays)
+        {
+            archiveDao.ArchiveDatabase("tickets", "ticket_id", archiveOlderThanDays);
+        }
     }
-
-
 }

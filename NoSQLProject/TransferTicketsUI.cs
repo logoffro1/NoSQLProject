@@ -81,7 +81,7 @@ namespace NoSQLProject
                 }
                 catch (Exception exception)
                 {
-                    Console.WriteLine($"Something went wrong:{exception.Message}");
+                    MessageBox.Show("Something went wrong","Error",MessageBoxButtons.OK);
                 }
                 finally
                 {

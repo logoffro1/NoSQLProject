@@ -71,10 +71,13 @@
             this.dataGridViewConfigItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewConfigItem.Location = new System.Drawing.Point(12, 38);
             this.dataGridViewConfigItem.Name = "dataGridViewConfigItem";
+            this.dataGridViewConfigItem.ReadOnly = true;
             this.dataGridViewConfigItem.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewConfigItem.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridViewConfigItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewConfigItem.Size = new System.Drawing.Size(776, 343);
             this.dataGridViewConfigItem.TabIndex = 5;
+            this.dataGridViewConfigItem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewConfigItem_CellContentClick);
             // 
             // ConfigItemUi
             // 

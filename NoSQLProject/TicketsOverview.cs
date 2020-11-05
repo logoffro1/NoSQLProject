@@ -9,6 +9,7 @@ using System.Xml;
 using System.CodeDom.Compiler;
 using System.Diagnostics;
 using MongoDB.Bson.Serialization.Conventions;
+using System.Collections;
 
 namespace NoSQLProject
 {
@@ -164,6 +165,38 @@ namespace NoSQLProject
             {
                 new SearchTickets(txtFilter, listViewTickets, GetFullListView());
                 ColorListRows();
+            }
+        }
+
+        //Emre Kutuk individual extra assignment
+
+        private bool firstClick = true;
+        private void listViewTickets_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Set the ListViewItemSorter property to a new ListViewItemComparer 
+            // object. Setting this property immediately sorts the 
+            // ListView using the ListViewItemComparer object.
+            firstClick = !firstClick;
+            this.listViewTickets.ListViewItemSorter = new ListViewItemComparer(e.Column, firstClick);
+        }
+
+        // Implements the manual sorting of items by columns.
+        class ListViewItemComparer : IComparer
+        {
+            private int col;
+            bool clicked;
+            public ListViewItemComparer(int column, bool clicked)
+            {
+                col = column;
+                this.clicked = clicked;
+            }
+
+            public int Compare(object x, object y)
+            {
+                if (clicked)
+                    return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                else
+                    return String.Compare(((ListViewItem)y).SubItems[col].Text, ((ListViewItem)x).SubItems[col].Text);
             }
         }
     }
