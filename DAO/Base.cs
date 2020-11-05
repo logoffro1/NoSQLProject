@@ -38,6 +38,7 @@ namespace DAO
                 throw new Exception(e.ToString());
             }
         }
+
         private void ConnectToArchiveDB()
         {
             try
@@ -154,7 +155,8 @@ namespace DAO
             return id;
         }
 
-        private BsonDocument AddTimeStamp(BsonDocument bsonDocument)
+        private BsonDocument
+            AddTimeStamp(BsonDocument bsonDocument) // Adds / Updates Timestamp of an Item for Archiving purposes
         {
             return bsonDocument.Add("updated_on",
                 DateTime.Now);
@@ -166,7 +168,8 @@ namespace DAO
             return archiveDb.GetCollection<BsonDocument>(collectionName);
         }
 
-        protected List<BsonDocument> ReadDocumentsArchive(string collectionName) //reads an entire collection from the DB
+        protected List<BsonDocument>
+            ReadDocumentsArchive(string collectionName) //reads an entire collection from the Archive DB
         {
             return GetArchiveCollection(collectionName).Find(new BsonDocument()).ToList();
         }
@@ -175,7 +178,7 @@ namespace DAO
         {
             if (daysOldArchive < 10)
             {
-                throw new Exception("Can't deleted files less than 10 days old");
+                throw new Exception("Can't delete files less than 10 days old");
             }
 
             DateTime archiveCutoff = DateTime.Now.AddDays(-daysOldArchive);
@@ -192,23 +195,24 @@ namespace DAO
 
                     try
                     {
-                        if (!bsonDoc[collectionUniqueIdName].IsBsonNull)
+                        if (!bsonDoc[collectionUniqueIdName].IsBsonNull) //Check ID Exists in Document
                         {
                             id = bsonDoc[collectionUniqueIdName].ToString();
-                        }
+                            if (collectionName == "tickets" && bsonDoc["status"] == "Open"
+                            ) // Only Archive Closed Tickets
+                            {
+                                continue;
+                            }
 
-                        if (collectionName == "tickets" && bsonDoc["status"] == "Open")
-                        {
-                            continue;
+                            archiveDb.GetCollection<BsonDocument>(collectionName).InsertOne(bsonDoc);
+                            DeleteDocument(collectionName, collectionUniqueIdName, id);
                         }
-                        archiveDb.GetCollection<BsonDocument>(collectionName).InsertOne(bsonDoc);
-                        DeleteDocument(collectionName, collectionUniqueIdName, id);
-
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
-                        throw new Exception($"ID Field named {collectionUniqueIdName} was not found in collection {collectionName}");
+                        throw new Exception(
+                            $"ID Field named {collectionUniqueIdName} was not found in collection {collectionName}");
                     }
                 }
             }

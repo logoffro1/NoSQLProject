@@ -257,5 +257,10 @@ namespace NoSQLProject
                 MessageBox.Show("Archive Successful", "Archive Successful");
             }
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

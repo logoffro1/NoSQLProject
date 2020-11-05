@@ -27,6 +27,7 @@ namespace DAO
 
         public void UpdateConfigItem(ConfigurationItem configItem)
         {
+            //Should Update at once
             UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "name", configItem.Name);
             UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "description", configItem.Description);
             UpdateDocument(COLLECTION_NAME, "CI_ID", configItem.ID, "owner", configItem.Owner);

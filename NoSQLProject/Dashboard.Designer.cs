@@ -52,8 +52,8 @@
             this.ticketsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnArchive = new System.Windows.Forms.Button();
             this.archivedItemsViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnArchive = new System.Windows.Forms.Button();
             this.pnlGeneral.SuspendLayout();
             this.pnlPersonal.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -113,6 +113,7 @@
             this.label2.Size = new System.Drawing.Size(216, 18);
             this.label2.TabIndex = 4;
             this.label2.Text = "Tickets That Need Attention";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // lblUrgentTickets
             // 
@@ -290,6 +291,13 @@
             this.configurationItemsToolStripMenuItem.Text = "Configuration Items";
             this.configurationItemsToolStripMenuItem.Click += new System.EventHandler(this.configurationItemsToolStripMenuItem_Click);
             // 
+            // archivedItemsViewToolStripMenuItem
+            // 
+            this.archivedItemsViewToolStripMenuItem.Name = "archivedItemsViewToolStripMenuItem";
+            this.archivedItemsViewToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.archivedItemsViewToolStripMenuItem.Text = "Archived Items View";
+            this.archivedItemsViewToolStripMenuItem.Click += new System.EventHandler(this.archivedItemsViewToolStripMenuItem_Click);
+            // 
             // btnArchive
             // 
             this.btnArchive.BackColor = System.Drawing.Color.SaddleBrown;
@@ -302,13 +310,6 @@
             this.btnArchive.Text = "Archive Database";
             this.btnArchive.UseVisualStyleBackColor = false;
             this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
-            // 
-            // archivedItemsViewToolStripMenuItem
-            // 
-            this.archivedItemsViewToolStripMenuItem.Name = "archivedItemsViewToolStripMenuItem";
-            this.archivedItemsViewToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
-            this.archivedItemsViewToolStripMenuItem.Text = "Archived Items View";
-            this.archivedItemsViewToolStripMenuItem.Click += new System.EventHandler(this.archivedItemsViewToolStripMenuItem_Click);
             // 
             // Dashboard
             // 
