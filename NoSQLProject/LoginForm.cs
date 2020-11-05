@@ -20,38 +20,58 @@ namespace NoSQLProject
             PasswordTxtBox.PasswordChar = '●';
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        public LoginForm(User user)                         // for remember me
         {
-
+            InitializeComponent();
+            PasswordTxtBox.PasswordChar = '●';
+            UsernameTxtBox.Text = user.username;
         }
+
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            User user = new User();
+            _ = new User();
             User_Service userService = new User_Service();
-            if (userService.IsUsernamePresent(UsernameTxtBox.Text))
+            if ((UsernameTxtBox.Text.Length < 1) || (PasswordTxtBox.Text.Length < 1))
             {
-                user = userService.GetUserByName(UsernameTxtBox.Text);
-                if (PasswordTxtBox.Text.Equals(user.password))
-                {
-                    this.Hide();
-                    new Form1().Show();
-                }
-                else
-                {
-                    label1.Text = "Incorrect password";
-                }
+                label1.Text = "Missing credentials";
             }
             else
             {
-                label1.Text = "Username does not exist";
+                if (userService.IsUsernamePresent(UsernameTxtBox.Text))
+                {
+                    User user = userService.GetUserByName(UsernameTxtBox.Text);
+                    if (PasswordTxtBox.Text.Equals(user.password))
+                    {
+                        this.Hide();
+                        new Dashboard(user).Show();
+                    }
+                    else
+                    {
+                        label1.Text = "Incorrect username or password";
+                    }
+                }
+                else
+                {
+                    label1.Text = "Username does not exist";
+                }
             }
-
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void ForgotPasswordLbl_Click(object sender, EventArgs e)
+        {
+            ForgottenPasswordForm passwordForm = new ForgottenPasswordForm();
+            passwordForm.Show();
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using Service;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,7 @@ namespace NoSQLProject
         User_Service user_Service = new User_Service();
         List<Ticket> tickets;
         User user;
+        bool isGeneral;
         public Dashboard(User user)
         {
             InitializeComponent();
@@ -39,6 +41,7 @@ namespace NoSQLProject
 
         private void DisplayPersonalPanel()
         {
+            isGeneral = false;
             pnlGeneral.Hide();
             pnlPersonal.Show();
             lblWelcome.Text = $"Welcome {user.firstName} {user.lastName}";
@@ -56,7 +59,7 @@ namespace NoSQLProject
             ticketID.Text = "ID";
             ColumnHeader ticketSubject = new ColumnHeader();
             ticketSubject.Text = "Subject";
-            ColumnHeader ticketUser= new ColumnHeader();
+            ColumnHeader ticketUser = new ColumnHeader();
             ticketUser.Text = "User";
             ColumnHeader ticketDate = new ColumnHeader();
             ticketDate.Text = "Date";
@@ -64,10 +67,10 @@ namespace NoSQLProject
             ticketType.Text = "Type";
             ColumnHeader ticketPriority = new ColumnHeader();
             ticketPriority.Text = "Priority";
-            
-            listViewTicket.Columns.AddRange(new ColumnHeader[] { ticketID, ticketSubject, ticketUser, ticketDate,ticketType, ticketPriority});
 
-            foreach (Ticket t in tickets.Where(t=> t.ReportedByUser.id.Equals(this.user.id) && t.IsOpen))
+            listViewTicket.Columns.AddRange(new ColumnHeader[] { ticketID, ticketSubject, ticketUser, ticketDate, ticketType, ticketPriority });
+
+            foreach (Ticket t in tickets.Where(t => t.ReportedByUser.id.Equals(this.user.id) && t.IsOpen))
             {
                 ListViewItem li = new ListViewItem(t.Id.ToString());
                 li.SubItems.Add(t.Subject.ToString());
@@ -84,8 +87,9 @@ namespace NoSQLProject
 
         private void DisplayGeneralPanel()
         {
+            isGeneral = true;
             pnlPersonal.Hide();
-            pnlGeneral.Show();   
+            pnlGeneral.Show();
             DisplayPriorityTexts();
             DisplayDeadlineText();
             DisplayStatusTex();
@@ -104,7 +108,7 @@ namespace NoSQLProject
                 lblStatus.ForeColor = Color.Red;
             }
             else
-            { 
+            {
                 lblStatus.Text = $"Status: Normal";
                 lblStatus.ForeColor = Color.Green;
             }
@@ -118,8 +122,8 @@ namespace NoSQLProject
             int overDeadlineTicketNr = allTickets.Where(t => t.Deadline < DateTime.Now && t.IsOpen).ToList().Count;
             lblUrgentTickets.Text = $"There are {overDeadlineTicketNr} ticket(s) that needs urgent attention!";
 
-            //if there are more than 3 tickets that over their deadline, the color becomes red
-            if (overDeadlineTicketNr <= 3)
+            //if there are more than 1 ticket over its deadline, the color becomes red
+            if (overDeadlineTicketNr <= 1)
                 lblUrgentTickets.ForeColor = Color.Green;
             else
                 lblUrgentTickets.ForeColor = Color.Red;
@@ -140,7 +144,10 @@ namespace NoSQLProject
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            Initialize();
+            if (isGeneral)
+                DisplayGeneralPanel();
+            else
+                DisplayPersonalPanel();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -177,6 +184,43 @@ namespace NoSQLProject
         {
             new LoginForm().Show();
             this.Close();
+        }
+
+        //Emre Kutuk individual extra assignment
+
+        private bool firstClick = true;
+        private void listViewTicket_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Set the ListViewItemSorter property to a new ListViewItemComparer 
+            // object. Setting this property immediately sorts the 
+            // ListView using the ListViewItemComparer object.
+            firstClick = !firstClick;
+            this.listViewTicket.ListViewItemSorter = new ListViewItemComparer(e.Column, firstClick);
+        }
+
+        // Implements the manual sorting of items by columns.
+        class ListViewItemComparer : IComparer
+        {
+            private int col;
+            bool clicked;
+            public ListViewItemComparer(int column, bool clicked)
+            {
+                col = column;
+                this.clicked = clicked;
+            }
+
+            public int Compare(object x, object y)
+            {
+                if (clicked)
+                    return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                else
+                    return String.Compare(((ListViewItem)y).SubItems[col].Text, ((ListViewItem)x).SubItems[col].Text);
+            }
+        }
+
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

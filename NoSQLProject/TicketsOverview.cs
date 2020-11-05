@@ -9,6 +9,7 @@ using System.Xml;
 using System.CodeDom.Compiler;
 using System.Diagnostics;
 using MongoDB.Bson.Serialization.Conventions;
+using System.Collections;
 
 namespace NoSQLProject
 {
@@ -16,8 +17,10 @@ namespace NoSQLProject
     {
         private List<Ticket> tickets;
         private Ticket_Service ticketService;
-        public TicketsOverview()
+        private User user;
+        public TicketsOverview(User user)
         {
+            this.user = user;
             InitializeComponent();
             ticketService = new Ticket_Service();
             if (tickets == null)
@@ -113,7 +116,7 @@ namespace NoSQLProject
         private void btnCreateIncident_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AddTicketForm().Show();
+            new AddTicketForm(user).Show();
         }
 
         private void listViewTickets_DoubleClick(object sender, EventArgs e)
@@ -165,6 +168,43 @@ namespace NoSQLProject
                 new SearchTickets(txtFilter, listViewTickets, GetFullListView());
                 ColorListRows();
             }
+        }
+
+        //Emre Kutuk individual extra assignment
+
+        private bool firstClick = true;
+        private void listViewTickets_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Set the ListViewItemSorter property to a new ListViewItemComparer 
+            // object. Setting this property immediately sorts the 
+            // ListView using the ListViewItemComparer object.
+            firstClick = !firstClick;
+            this.listViewTickets.ListViewItemSorter = new ListViewItemComparer(e.Column, firstClick);
+        }
+
+        // Implements the manual sorting of items by columns.
+        class ListViewItemComparer : IComparer
+        {
+            private int col;
+            bool clicked;
+            public ListViewItemComparer(int column, bool clicked)
+            {
+                col = column;
+                this.clicked = clicked;
+            }
+
+            public int Compare(object x, object y)
+            {
+                if (clicked)
+                    return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                else
+                    return String.Compare(((ListViewItem)y).SubItems[col].Text, ((ListViewItem)x).SubItems[col].Text);
+            }
+        }
+
+        private void ticketsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

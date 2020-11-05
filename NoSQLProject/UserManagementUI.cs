@@ -16,9 +16,12 @@ namespace NoSQLProject
     {
         List<User> allUsers;
         User_Service service;
-        public UserManagementUI()
+        private User user;
+        public UserManagementUI(User user)
         {
+
             InitializeComponent();
+            this.user = user;
             allUsers = new List<User>();
             service = new User_Service();
         }
@@ -30,7 +33,7 @@ namespace NoSQLProject
 
 
         // Determines the filtering type
-        private void filterUsers()
+        private void FilterUsers()
         {
             switch(cmbType.SelectedIndex)
             {
@@ -183,14 +186,14 @@ namespace NoSQLProject
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            filterUsers();
+            FilterUsers();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1();
+            Dashboard dashboard = new Dashboard(user);
             this.Hide();
-            form.ShowDialog();            
+            dashboard.ShowDialog();            
         }
     }
 }

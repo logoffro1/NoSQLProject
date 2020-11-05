@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
@@ -21,7 +22,7 @@ namespace Service
         }
         public List<User> getAllUsers()
         {
-            return userDAO.getAllUsers();
+            return userDAO.GetAllUsers();
         }
         public void UpdateUserTickets(User newUser)
         {
@@ -34,6 +35,10 @@ namespace Service
         public User GetUserByName(string username)
         {
             return userDAO.GetUserByName(username);
+        }
+        public void UpdateUserPassword(User user,string password)
+        {
+            userDAO.UpdateUserPassword(user, password);
         }
     }
 }
