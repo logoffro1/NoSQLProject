@@ -29,6 +29,8 @@ namespace DAO
                     Deadline = (DateTime)(doc["deadline"])
                 };
                 User user = ticket.ReportedByUser;
+
+                //this is only useful if we delete a user from the database without deleting the tickets associated with that user
                 if (user == null)
                 {
                     user = new User

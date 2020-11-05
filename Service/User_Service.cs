@@ -22,7 +22,7 @@ namespace Service
         }
         public List<User> getAllUsers()
         {
-            return userDAO.getAllUsers();
+            return userDAO.GetAllUsers();
         }
         public void UpdateUserTickets(User newUser)
         {

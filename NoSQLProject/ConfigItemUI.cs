@@ -67,5 +67,10 @@ namespace NoSQLProject
         {
 
         }
+
+        private void ConfigItemUi_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

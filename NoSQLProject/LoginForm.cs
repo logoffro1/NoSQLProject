@@ -44,7 +44,7 @@ namespace NoSQLProject
                     if (PasswordTxtBox.Text.Equals(user.password))
                     {
                         this.Hide();
-                        new Form1().Show();
+                        new Dashboard(user).Show();
                     }
                     else
                     {
@@ -67,6 +67,11 @@ namespace NoSQLProject
         {
             ForgottenPasswordForm passwordForm = new ForgottenPasswordForm();
             passwordForm.Show();
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
