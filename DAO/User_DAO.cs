@@ -68,9 +68,9 @@ namespace DAO
                 }
                     
             }
-            return new User  //this is unreachable
+            return new User //this is unreachable
             {
-                id = 0
+               id = 0
             };
 
 
@@ -108,6 +108,11 @@ namespace DAO
         public void UpdateUserTickets(User newUser)
         {
             UpdateDocument("users", "user_id", newUser.id, "tickets", newUser.nrTickets);
+        }
+
+        public void UpdateUserPassword(User user,string password)
+        {
+            UpdateDocument("users", "user_id", user.id, "password", password);
         }
     }
 }
