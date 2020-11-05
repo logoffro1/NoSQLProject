@@ -23,6 +23,7 @@ namespace DAO
         public Base()
         {
             ConnectToDB();
+            ConnectToArchiveDB();
             database = dbClient.GetDatabase("garden_group");
         }
 

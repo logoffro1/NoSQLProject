@@ -222,5 +222,15 @@ namespace NoSQLProject
         {
             Application.Exit();
         }
+
+        private void configurationItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ConfigItemUi().Show();
+        }
+
+        private void archivedItemsViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ArchiveView().Show();
+        }
     }
 }
