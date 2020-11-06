@@ -195,5 +195,29 @@ namespace NoSQLProject
             this.Hide();
             dashboard.ShowDialog();            
         }
+
+        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Dashboard(user).Show();
+        }
+
+        private void ticketOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new TicketsOverview(user).Show();
+        }
+
+        private void configurationItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new ConfigItemUi(user).Show();
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new LoginForm().Show();
+        }
     }
 }
