@@ -37,6 +37,7 @@ namespace NoSQLProject
             UpdateFields();
         }
 
+        //For changing the names
         private void UpdateFields()
         {
             lblDeadline.Text = "Deadline: "+ticket.Deadline.ToString("dd-MMM-yy");
@@ -45,6 +46,8 @@ namespace NoSQLProject
             lblDescriptionFlow.Text = ticket.Description;
 
         }
+
+        //Fills the combo box
 
         private void FillComboBox()
         {
@@ -56,6 +59,8 @@ namespace NoSQLProject
             cmbUsers.SelectedIndex= 0;
         }
 
+        //Updates the user by reducing the number of the old user tickets and increasing the number of new user tickets.
+        //Also Ticket is updated here in order to change the user id.
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             User oldUser = ticket.ReportedByUser;
@@ -79,7 +84,7 @@ namespace NoSQLProject
                     ticketService.UpdateTicketUser(ticket);
                     MessageBox.Show("User of the ticket is updated", "Transfer completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                catch (Exception exception)
+                catch
                 {
                     MessageBox.Show("Something went wrong","Error",MessageBoxButtons.OK);
                 }

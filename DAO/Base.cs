@@ -18,11 +18,12 @@ namespace DAO
         private MongoClient dbClient;
         private IMongoDatabase database;
         private MongoClient dbArchiveClient;
-        IMongoDatabase archiveDb;
+        private IMongoDatabase archiveDb;
 
         public Base()
         {
             ConnectToDB();
+            ConnectToArchiveDB();
             database = dbClient.GetDatabase("garden_group");
         }
 
@@ -37,12 +38,13 @@ namespace DAO
                 throw new Exception(e.ToString());
             }
         }
+
         private void ConnectToArchiveDB()
         {
             try
             {
-                dbClient = new MongoClient(CONNECTION_STRING_ARCHIVE);
-                dbArchiveClient.GetDatabase("garden_group_archive");
+                dbArchiveClient = new MongoClient(CONNECTION_STRING_ARCHIVE);
+                archiveDb = dbArchiveClient.GetDatabase("garden_group_archive");
             }
             catch (Exception e)
             {
@@ -153,18 +155,30 @@ namespace DAO
             return id;
         }
 
-        private BsonDocument AddTimeStamp(BsonDocument bsonDocument)
+        private BsonDocument
+            AddTimeStamp(BsonDocument bsonDocument) // Adds / Updates Timestamp of an Item for Archiving purposes
         {
             return bsonDocument.Add("updated_on",
                 DateTime.Now);
         }
 
+        private IMongoCollection<BsonDocument>
+            GetArchiveCollection(string collectionName) //gets the specified collection(table) from the Archive DB
+        {
+            return archiveDb.GetCollection<BsonDocument>(collectionName);
+        }
+
+        protected List<BsonDocument>
+            ReadDocumentsArchive(string collectionName) //reads an entire collection from the Archive DB
+        {
+            return GetArchiveCollection(collectionName).Find(new BsonDocument()).ToList();
+        }
 
         protected void ArchiveDatabase(string collectionName, string collectionUniqueIdName, int daysOldArchive)
         {
             if (daysOldArchive < 10)
             {
-                throw new Exception("Can't deleted files less than 10 days old");
+                throw new Exception("Can't delete files less than 10 days old");
             }
 
             DateTime archiveCutoff = DateTime.Now.AddDays(-daysOldArchive);
@@ -173,7 +187,7 @@ namespace DAO
 
             foreach (BsonDocument bsonDoc in collection)
             {
-                DateTime updated = (DateTime) bsonDoc["updated_on"];;
+                DateTime updated = (DateTime) bsonDoc["updated_on"];
 
                 if (DateTime.Compare(updated, archiveCutoff) == -1)
                 {
@@ -181,18 +195,24 @@ namespace DAO
 
                     try
                     {
-                        if (!bsonDoc[collectionUniqueIdName].IsBsonNull)
+                        if (!bsonDoc[collectionUniqueIdName].IsBsonNull) //Check ID Exists in Document
                         {
-                            id = (string) bsonDoc[collectionUniqueIdName];
-                        }
+                            id = bsonDoc[collectionUniqueIdName].ToString();
+                            if (collectionName == "tickets" && bsonDoc["status"] == "Open"
+                            ) // Only Archive Closed Tickets
+                            {
+                                continue;
+                            }
 
-                        archiveDb.GetCollection<BsonDocument>(collectionName).InsertOne(bsonDoc);
-                        DeleteDocument(collectionName, collectionUniqueIdName, id);
+                            archiveDb.GetCollection<BsonDocument>(collectionName).InsertOne(bsonDoc);
+                            DeleteDocument(collectionName, collectionUniqueIdName, id);
+                        }
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
-                        throw new Exception("Different named ID field");
+                        throw new Exception(
+                            $"ID Field named {collectionUniqueIdName} was not found in collection {collectionName}");
                     }
                 }
             }

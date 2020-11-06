@@ -163,7 +163,7 @@
             this.btnTransfer.TabIndex = 11;
             this.btnTransfer.Text = "Transfer tickets";
             this.btnTransfer.UseVisualStyleBackColor = true;
-            this.btnTransfer.Click += new System.EventHandler(this.button1_Click);
+            this.btnTransfer.Click += new System.EventHandler(this.btnTransfer_Click);
             // 
             // TicketInfoForm
             // 
@@ -187,6 +187,7 @@
             this.Name = "TicketInfoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TicketInfoForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TicketInfoForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

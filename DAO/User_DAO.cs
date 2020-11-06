@@ -18,7 +18,7 @@ namespace DAO
         }
 
         //written by Egehan Cinarli: gets all the users from the database as a Bson Document and converts it into a List of user objects.
-        public List<User> getAllUsers()
+        public List<User> GetAllUsers()
         {
             List<BsonDocument> docs = ReadDocuments("users");
             List<User> allUsers = new List<User>();
@@ -57,7 +57,7 @@ namespace DAO
         }
         public User GetUserByName(string username)
         {           
-            List<User> users = getAllUsers();
+            List<User> users = GetAllUsers();
             foreach (User user in users)
             {
                 if(user.username == username)

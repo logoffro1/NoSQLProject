@@ -10,11 +10,12 @@ namespace NoSQLProject
     public partial class ConfigItemUi : Form
     {
         private BindingSource bindingSource = new BindingSource();
+        private User user;
 
-
-        public ConfigItemUi()
+        public ConfigItemUi(User user)
         {
             InitializeComponent();
+            this.user = user;
         }
 
         private void NewConfigItem_Click(object sender, EventArgs e)
@@ -66,6 +67,17 @@ namespace NoSQLProject
         private void dataGridViewConfigItem_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void ConfigItemUi_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Dashboard(user).Show();
         }
     }
 }
