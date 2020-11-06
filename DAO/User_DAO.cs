@@ -66,7 +66,12 @@ namespace DAO
                 }
                     
             }
-            return null;                                  
+            return new User  //this is unreachable
+            {
+                id = 0
+            };
+
+
         }
         private BsonDocument CreateUserDocument(User user)
         {
