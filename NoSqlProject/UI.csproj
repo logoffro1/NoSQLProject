@@ -161,6 +161,7 @@
     <Compile Include="ForgottenPasswordForm.Designer.cs">
       <DependentUpon>ForgottenPasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListViewItemComparer.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
