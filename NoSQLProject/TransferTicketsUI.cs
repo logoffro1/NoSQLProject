@@ -60,6 +60,7 @@ namespace NoSQLProject
         }
 
         //Updates the user by reducing the number of the old user tickets and increasing the number of new user tickets.
+        //Also Ticket is updated here in order to change the user id.
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             User oldUser = ticket.ReportedByUser;
