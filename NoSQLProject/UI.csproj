@@ -155,6 +155,12 @@
     <Compile Include="ConfigItemForm.Designer.cs">
       <DependentUpon>ConfigItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ForgottenPasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ForgottenPasswordForm.Designer.cs">
+      <DependentUpon>ForgottenPasswordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +213,12 @@
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <EmbeddedResource Include="ForgottenPasswordForm.resx">
+      <DependentUpon>ForgottenPasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> parent of f0dd294... Update UI.csproj
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
 =======
