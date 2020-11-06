@@ -26,7 +26,7 @@ namespace NoSQLProject
             if (tickets == null)
                 tickets = ticketService.GetAllTickets();
         }
-        private void LoadListView()
+        public void LoadListView()
         {
             listViewTickets.Items.Clear();
 
@@ -125,7 +125,7 @@ namespace NoSQLProject
             {
                 listViewTickets.SelectedItems[0].Checked = !listViewTickets.SelectedItems[0].Checked;
                 Ticket ticket = GetTicketById(int.Parse(listViewTickets.SelectedItems[0].Text));
-                new TicketInfoForm(ticket).ShowDialog();
+                new TicketInfoForm(ticket,this).ShowDialog();
             }
         }
 

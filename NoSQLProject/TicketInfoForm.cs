@@ -7,10 +7,11 @@ namespace NoSQLProject
     public partial class TicketInfoForm : Form
     {
         private Ticket ticket;
+        private TicketsOverview overview;
         public TicketInfoForm(Ticket ticket)
         {
             InitializeComponent();
-            this.ticket = ticket;
+            this.ticket = ticket;          
 
             if (ticket != null)
                 DisplayInfo();
@@ -23,6 +24,10 @@ namespace NoSQLProject
             {
                 btnTransfer.Enabled = false;
             }
+        }
+        //For reloading the page.
+        public TicketInfoForm(Ticket ticket, TicketsOverview overview): this(ticket){ 
+            this.overview = overview;
         }
         private void DisplayInfo()
         {
@@ -40,13 +45,16 @@ namespace NoSQLProject
         {
             this.Hide();
         }
+        private void TicketInfoForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            overview.LoadListView();
+        }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void btnTransfer_Click(object sender, System.EventArgs e)
         {
             TransferTicketsUI ticketsUI = new TransferTicketsUI(ticket);
             ticketsUI.ShowDialog();
-
-            //after here we should update the ticket form (name of the user stays the same) but I didnt want to ask stuff to your code without asking bro so ill wait -ege
+            this.Close();
         }
     }
 }
