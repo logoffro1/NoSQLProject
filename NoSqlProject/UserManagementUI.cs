@@ -89,6 +89,7 @@ namespace NoSQLProject
             }
         }
 
+        //Just reducing the duplicate codes
         private void AddUserToListView(User u)
         {
             ListViewItem item = new ListViewItem(
