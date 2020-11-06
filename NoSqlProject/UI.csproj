@@ -215,6 +215,12 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <EmbeddedResource Include="ForgottenPasswordForm.resx">
+      <DependentUpon>ForgottenPasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> parent of f0dd294... Update UI.csproj
 =======
     <EmbeddedResource Include="ForgottenPasswordForm.resx">
       <DependentUpon>ForgottenPasswordForm.cs</DependentUpon>
