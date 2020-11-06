@@ -79,7 +79,7 @@ namespace NoSQLProject
                     ticketService.UpdateTicketUser(ticket);
                     MessageBox.Show("User of the ticket is updated", "Transfer completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                catch (Exception exception)
+                catch
                 {
                     MessageBox.Show("Something went wrong","Error",MessageBoxButtons.OK);
                 }

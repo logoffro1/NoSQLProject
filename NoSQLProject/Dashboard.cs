@@ -22,6 +22,7 @@ namespace NoSQLProject
         List<Ticket> tickets;
         User user;
         bool isGeneral;
+
         public Dashboard(User user)
         {
             InitializeComponent();
@@ -46,10 +47,11 @@ namespace NoSQLProject
             pnlPersonal.Show();
             lblWelcome.Text = $"Welcome {user.firstName} {user.lastName}";
             tickets = ticket_Service.GetAllTickets();
-            lblPersonalTicketInfo.Text = $"You have {tickets.Where(t => t.ReportedByUser.id.Equals(this.user.id) && t.IsOpen).ToList().Count} open ticket(s).";
+            lblPersonalTicketInfo.Text =
+                $"You have {tickets.Where(t => t.ReportedByUser.id.Equals(this.user.id) && t.IsOpen).ToList().Count} open ticket(s).";
             LoadListView();
-
         }
+
         private void LoadListView()
         {
             //fills the ticket list for personal open tickets
@@ -68,7 +70,8 @@ namespace NoSQLProject
             ColumnHeader ticketPriority = new ColumnHeader();
             ticketPriority.Text = "Priority";
 
-            listViewTicket.Columns.AddRange(new ColumnHeader[] { ticketID, ticketSubject, ticketUser, ticketDate, ticketType, ticketPriority });
+            listViewTicket.Columns.AddRange(new ColumnHeader[]
+                {ticketID, ticketSubject, ticketUser, ticketDate, ticketType, ticketPriority});
 
             foreach (Ticket t in tickets.Where(t => t.ReportedByUser.id.Equals(this.user.id) && t.IsOpen))
             {
@@ -128,14 +131,18 @@ namespace NoSQLProject
             else
                 lblUrgentTickets.ForeColor = Color.Red;
         }
+
         private void DisplayPriorityTexts()
         {
             List<Ticket> allTickets = ticket_Service.GetAllTickets();
 
             //gets the nr of open tickets for each priority
-            int highPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.High && t.IsOpen).ToList().Count;
-            int normalPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.Normal && t.IsOpen).ToList().Count;
-            int lowPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.Low && t.IsOpen).ToList().Count;
+            int highPriorityTicketNr =
+                allTickets.Where(t => t.Priority == TicketPriorityType.High && t.IsOpen).ToList().Count;
+            int normalPriorityTicketNr = allTickets.Where(t => t.Priority == TicketPriorityType.Normal && t.IsOpen)
+                .ToList().Count;
+            int lowPriorityTicketNr =
+                allTickets.Where(t => t.Priority == TicketPriorityType.Low && t.IsOpen).ToList().Count;
 
             lblHighPriorityTickets.Text = $"Tickets with high priority; {highPriorityTicketNr}";
             lblNormalPriorityTickets.Text = $"Tickets with normal priority; {normalPriorityTicketNr}";
@@ -189,6 +196,7 @@ namespace NoSQLProject
         //Emre Kutuk individual extra assignment
 
         private bool firstClick = true;
+
         private void listViewTicket_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             // Set the ListViewItemSorter property to a new ListViewItemComparer 
@@ -203,6 +211,7 @@ namespace NoSQLProject
         {
             private int col;
             bool clicked;
+
             public ListViewItemComparer(int column, bool clicked)
             {
                 col = column;
@@ -212,10 +221,59 @@ namespace NoSQLProject
             public int Compare(object x, object y)
             {
                 if (clicked)
-                    return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                    return String.Compare(((ListViewItem) x).SubItems[col].Text, ((ListViewItem) y).SubItems[col].Text);
                 else
-                    return String.Compare(((ListViewItem)y).SubItems[col].Text, ((ListViewItem)x).SubItems[col].Text);
+                    return String.Compare(((ListViewItem) y).SubItems[col].Text, ((ListViewItem) x).SubItems[col].Text);
             }
+        }
+
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void configurationItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new ConfigItemUi(user).Show();
+        }
+
+        private void archivedItemsViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ArchiveView().Show();
+        }
+
+        private void btnArchive_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                "Are you sure you want to archive tickets and configuration items older than 10 days?",
+                "Archive Database",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Archive_Service archiveService = new Archive_Service();
+
+                archiveService.ArchiveTicketDatabase(10);
+                archiveService.ArchiveConfigItemDatabase(10);
+
+                MessageBox.Show("Archive Successful", "Archive Successful");
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ticketsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new TicketsOverview(user).Show();
+        }
+
+        private void usersOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new UserManagementUI(user).Show();
         }
     }
 }

@@ -131,17 +131,17 @@
     <Compile Include="AddUserWindow.Designer.cs">
       <DependentUpon>AddUserWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ArchiveView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArchiveView.Designer.cs">
+      <DependentUpon>ArchiveView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigItemUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConfigItemUI.Designer.cs">
       <DependentUpon>ConfigItemUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -194,6 +194,9 @@
     <EmbeddedResource Include="AddUserWindow.resx">
       <DependentUpon>AddUserWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ArchiveView.resx">
+      <DependentUpon>ArchiveView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConfigItemForm.resx">
       <DependentUpon>ConfigItemForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,8 +206,13 @@
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="ForgottenPasswordForm.resx">
+      <DependentUpon>ForgottenPasswordForm.cs</DependentUpon>
+>>>>>>> 5e70d3113a5b87ba7c58d534069416f4c611a00c
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

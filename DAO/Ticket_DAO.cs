@@ -29,6 +29,8 @@ namespace DAO
                     Deadline = (DateTime)(doc["deadline"])
                 };
                 User user = ticket.ReportedByUser;
+
+                //this is only useful if we delete a user from the database without deleting the tickets associated with that user
                 if (user == null)
                 {
                     user = new User
@@ -73,6 +75,29 @@ namespace DAO
                 {"description",ticket.Description },
                 {"deadline",ticket.Deadline}
             };
+        }
+
+        public List<Ticket> GetAllArchivedTickets()
+        {
+            List<BsonDocument> ticketsBson = ReadDocumentsArchive(this.collectionName);
+            List<Ticket> tickets = new List<Ticket>();
+            foreach (var doc in ticketsBson)
+            {
+                Ticket ticket = new Ticket
+                {
+                    Id = (int)doc["ticket_id"],
+                    ReportedByUser = new User_DAO().GetUserById((int)doc["user_id"]),
+                    Subject = (string)doc["subject"],
+                    IncidentDate = (DateTime)doc["date"],
+                    Type = (TicketIncidentType)Enum.Parse(typeof(TicketIncidentType), (string)doc["type"], true),
+                    Priority = (TicketPriorityType)Enum.Parse(typeof(TicketPriorityType), (string)doc["priority"], true),
+                    Description = (string)doc["description"],
+                    Deadline = (DateTime)(doc["deadline"])
+                };
+                ticket.IsOpen = ticket.SetStatus((string)doc["status"]);
+                tickets.Add(ticket);
+            }
+            return tickets;
         }
     }
 }

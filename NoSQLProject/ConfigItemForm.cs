@@ -15,7 +15,7 @@ namespace NoSQLProject
 {
     public partial class ConfigItemForm : Form
     {
-        ConfigurationItem_Service configItemService = new ConfigurationItem_Service();
+        readonly ConfigurationItem_Service configItemService = new ConfigurationItem_Service();
         private ConfigurationItem ci;
 
         public ConfigItemForm()
@@ -33,24 +33,24 @@ namespace NoSQLProject
         {
             if (textBoxCIName.Text.Equals("") || textBoxCIDescription.Text.Equals("") ||
                 comboBoxOwner.SelectedItem == null || textBoxLocation.Text.Equals("") ||
-                comboBoxImportance.SelectedItem == null)
+                comboBoxImportance.SelectedItem == null) //Check if all fields are filled
             {
                 MessageBox.Show("All fields must be filled");
                 return;
             }
 
-            if (ci == null)
+            if (ci == null) // if null then new CI
             {
                 ci = new ConfigurationItem(textBoxCIName.Text, textBoxCIDescription.Text,
                     int.Parse(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]),
                     textBoxLocation.Text,
                     (TicketPriorityType) comboBoxImportance.SelectedIndex);
             }
-            else
+            else // Else editing
             {
                 ci.Name = textBoxCIName.Text;
                 ci.Description = textBoxCIDescription.Text;
-                ci.Owner = int.Parse(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]);
+                ci.Owner = Int32.Parse(comboBoxOwner.SelectedValue.ToString());
                 ci.Location = textBoxLocation.Text;
                 ci.Importance = (TicketPriorityType) comboBoxImportance.SelectedIndex;
             }
@@ -66,7 +66,8 @@ namespace NoSQLProject
             }
 
             MessageBox.Show($"Configuration Item Added\n{ci.ToString()}"); // Successfully added
-            ConfigItemUi ciForm = (ConfigItemUi) Application.OpenForms["ConfigItemUI"];
+
+            ConfigItemUi ciForm = (ConfigItemUi) Application.OpenForms["ConfigItemUI"];// Update the List in Original Form
             ciForm.UpdateList();
             this.Close();
         }
@@ -76,17 +77,24 @@ namespace NoSQLProject
             User_Service userService = new User_Service();
             List<User> userList = userService.getAllUsers();
 
-            comboBoxOwner.BeginUpdate();
+            DataTable comboDataTable = new DataTable("users");
+            comboDataTable.Columns.Add("id");
+            comboDataTable.Columns.Add("Name");
+
             foreach (User user in userList)
             {
-                string name = $"{user.id} {user.firstName} {user.lastName}";
-                comboBoxOwner.AutoCompleteCustomSource.Add(name); // Allows the user to search the combobox by typing
-                comboBoxOwner.Items.Add(name);
-                comboBoxOwner.ValueMember = user.id.ToString(); // Stores ID of user for later retrieval
+                string name = $"{user.firstName} {user.lastName}";
+                DataRow dr = comboDataTable.NewRow();
+                dr["id"] = user.id;
+                dr["name"] = name;
+                comboDataTable.Rows.Add(dr);
             }
 
-            comboBoxOwner.EndUpdate();
-            comboBoxOwner.SelectedIndex = 0;
+            //Only Show Name but linked to ID
+            comboBoxOwner.DataSource = comboDataTable;
+            comboBoxOwner.DisplayMember = "Name";
+            comboBoxOwner.ValueMember = "id"; //
+            comboBoxOwner.SelectedValue = 0;
 
             comboBoxImportance.Items.Add(TicketPriorityType.Low);
             comboBoxImportance.Items.Add(TicketPriorityType.Normal);
@@ -101,13 +109,18 @@ namespace NoSQLProject
                 textBoxCIName.Text = ci.Name;
                 textBoxLocation.Text = ci.Location;
                 comboBoxImportance.SelectedIndex = (int) ci.Importance;
-                comboBoxOwner.SelectedIndex = ci.Owner;
+                comboBoxOwner.SelectedValue = ci.Owner;
             }
             else
             {
                 buttonAddConfigItem.Text = "Add";
                 this.Text = "Ädd New Configuration Item";
             }
+        }
+
+        private void comboBoxOwner_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

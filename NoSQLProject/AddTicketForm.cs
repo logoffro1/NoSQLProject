@@ -16,8 +16,10 @@ namespace NoSQLProject
     {
         User_Service userService = new User_Service();
         List<User> users = new List<User>();
-        public AddTicketForm()
+        private User user;
+        public AddTicketForm(User user)
         {
+            this.user = user;
             InitializeComponent();
         }
 
@@ -129,7 +131,7 @@ namespace NoSQLProject
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new TicketsOverview().Show();
+            new TicketsOverview(user).Show();
 
         }
     }

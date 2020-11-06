@@ -17,8 +17,10 @@ namespace NoSQLProject
     {
         private List<Ticket> tickets;
         private Ticket_Service ticketService;
-        public TicketsOverview()
+        private User user;
+        public TicketsOverview(User user)
         {
+            this.user = user;
             InitializeComponent();
             ticketService = new Ticket_Service();
             if (tickets == null)
@@ -114,7 +116,7 @@ namespace NoSQLProject
         private void btnCreateIncident_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AddTicketForm().Show();
+            new AddTicketForm(user).Show();
         }
 
         private void listViewTickets_DoubleClick(object sender, EventArgs e)
@@ -129,6 +131,7 @@ namespace NoSQLProject
 
         private void btnChangeStatus_Click(object sender, EventArgs e)
         {
+            //for the checked items, if the status is closed then change it to open, if it is open then change it to close
             if (listViewTickets.CheckedItems.Count > 0)
             {
                 foreach (ListViewItem item in listViewTickets.CheckedItems)
@@ -168,6 +171,7 @@ namespace NoSQLProject
             }
         }
 
+        ////////////////////////////////////
         //Emre Kutuk individual extra assignment
 
         private bool firstClick = true;
@@ -198,6 +202,31 @@ namespace NoSQLProject
                 else
                     return String.Compare(((ListViewItem)y).SubItems[col].Text, ((ListViewItem)x).SubItems[col].Text);
             }
+        }
+        ///////////////////////////////////////////////////////////////////
+
+        private void ticketsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Dashboard(user).Show();
+        }
+
+        private void usersOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new UserManagementUI(user).Show();
+        }
+
+        private void configurationItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new ConfigItemUi(user).Show();
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new LoginForm().Show();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
+using Model;
 
 namespace Service
 {
@@ -24,6 +25,16 @@ namespace Service
         public void ArchiveTicketDatabase(int archiveOlderThanDays)
         {
             archiveDao.ArchiveDatabase("tickets", "ticket_id", archiveOlderThanDays);
+        }
+
+        public List<Ticket> GetAllArchivedTickets()
+        {
+            return new Archive_DAO().GetAllArchivedTickets();
+        }
+
+        public List<ConfigurationItem> GetArchivedConfigItems()
+        {
+            return new Archive_DAO().GetAllArchivedConfigItems();
         }
     }
 }

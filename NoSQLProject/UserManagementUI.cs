@@ -16,9 +16,12 @@ namespace NoSQLProject
     {
         List<User> allUsers;
         User_Service service;
-        public UserManagementUI()
+        private User user;
+        public UserManagementUI(User user)
         {
+
             InitializeComponent();
+            this.user = user;
             allUsers = new List<User>();
             service = new User_Service();
         }
@@ -188,9 +191,33 @@ namespace NoSQLProject
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Form1 form = new Form1();
+            Dashboard dashboard = new Dashboard(user);
             this.Hide();
-            form.ShowDialog();            
+            dashboard.ShowDialog();            
+        }
+
+        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Dashboard(user).Show();
+        }
+
+        private void ticketOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new TicketsOverview(user).Show();
+        }
+
+        private void configurationItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new ConfigItemUi(user).Show();
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new LoginForm().Show();
         }
     }
 }

@@ -132,12 +132,13 @@
             // comboBoxOwner
             // 
             this.comboBoxOwner.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxOwner.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.comboBoxOwner.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxOwner.FormattingEnabled = true;
             this.comboBoxOwner.Location = new System.Drawing.Point(156, 142);
             this.comboBoxOwner.Name = "comboBoxOwner";
             this.comboBoxOwner.Size = new System.Drawing.Size(248, 21);
             this.comboBoxOwner.TabIndex = 11;
+            this.comboBoxOwner.SelectedIndexChanged += new System.EventHandler(this.comboBoxOwner_SelectedIndexChanged);
             // 
             // ConfigItemForm
             // 

@@ -47,7 +47,7 @@ namespace NoSQLProject
                 {
                     service.AddUser(newUser);
                 }
-                catch(Exception exception)
+                catch
                 {
                     MessageBox.Show("Something went wrong", "Error", MessageBoxButtons.OK);
                 }
