@@ -25,7 +25,6 @@ namespace NoSQLProject
             this.listViewTickets = listViewTickets;
             this.allTickets = allTickets;
             string[] searchBoxOptions = searchBox.Text.Split(' ');
-
             items = new List<ListViewItem>();
 
 

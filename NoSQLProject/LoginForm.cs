@@ -35,6 +35,7 @@ namespace NoSQLProject
             {
                 if (userService.IsUsernamePresent(UsernameTxtBox.Text))
                 {
+
                     User user = userService.GetUserByName(UsernameTxtBox.Text);
                     if (PasswordTxtBox.Text.Equals(user.password))
                     {

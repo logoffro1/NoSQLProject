@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using MongoDB.Bson;
 namespace DAO
 {
+    /*
+     * Written by Cosmin Ilie (645976)
+     */
     public class Ticket_DAO : Base
     {
         private string collectionName = "tickets";

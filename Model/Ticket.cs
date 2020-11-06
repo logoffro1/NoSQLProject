@@ -2,6 +2,9 @@
 
 namespace Model
 {
+    /*
+     * Written by Cosmin Ilie (645976)
+     */
     public class Ticket
     {
         public int Id { get; set; }

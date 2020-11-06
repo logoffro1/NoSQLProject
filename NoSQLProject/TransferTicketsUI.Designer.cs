@@ -127,7 +127,7 @@
             this.flwDescription.Controls.Add(this.lblDescriptionFlow);
             this.flwDescription.Location = new System.Drawing.Point(17, 265);
             this.flwDescription.Name = "flwDescription";
-            this.flwDescription.Size = new System.Drawing.Size(441, 114);
+            this.flwDescription.Size = new System.Drawing.Size(771, 114);
             this.flwDescription.TabIndex = 8;
             // 
             // lblDescriptionFlow

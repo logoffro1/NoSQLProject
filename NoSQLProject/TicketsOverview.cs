@@ -4,15 +4,12 @@ using System.Windows.Forms;
 using Service;
 using Model;
 using System.Drawing;
-using System.Drawing.Design;
-using System.Xml;
-using System.CodeDom.Compiler;
-using System.Diagnostics;
-using MongoDB.Bson.Serialization.Conventions;
-using System.Collections;
 
 namespace NoSQLProject
 {
+    /*
+     * Written by Cosmin Ilie (645976)
+     */
     public partial class TicketsOverview : Form
     {
         private List<Ticket> tickets;

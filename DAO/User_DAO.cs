@@ -49,7 +49,7 @@ namespace DAO
 
             foreach (BsonDocument doc in users)
             {
-                if (doc["username"].AsString.ToLower().Equals(username.ToLower()))
+                if (doc["username"].AsString.Equals(username))
                     return true;
             }
 
