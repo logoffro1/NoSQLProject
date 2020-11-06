@@ -175,7 +175,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddUserWindow";
             this.Text = "AddUserWindow";
-            this.Load += new System.EventHandler(this.AddUserWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

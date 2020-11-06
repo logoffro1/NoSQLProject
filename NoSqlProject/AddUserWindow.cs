@@ -24,11 +24,6 @@ namespace NoSQLProject
             service = new User_Service();
             allUsers = new List<User>();
         }
-        private void AddUserWindow_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         //Adds a new user.
         private void btnAddUser_Click(object sender, EventArgs e)
         {
@@ -57,7 +52,7 @@ namespace NoSQLProject
             }
 
         }
-
+        //Checks if the username is already in the database.
         private bool isUserValid()
         {
             if (service.IsUsernamePresent(txtUsername.Text))
@@ -81,7 +76,7 @@ namespace NoSQLProject
         }
 
 
-
+        //Cleaning the text fields.
         private void ClearFields()
         {
             txtName.Clear();
