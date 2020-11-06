@@ -37,6 +37,10 @@ namespace NoSQLProject
 
         private void Initialize()
         {
+            this.Text = $"Dashboard | {this.user.firstName} {this.user.lastName}";
+            cmbDashboardType.Items.Add("General Dashboard");
+            cmbDashboardType.Items.Add("Personal Dashboard");
+            cmbDashboardType.SelectedIndex = 0;
             DisplayGeneralPanel();
         }
 
@@ -149,6 +153,7 @@ namespace NoSQLProject
             lblLowPriorityTickets.Text = $"Tickets with low priority; {lowPriorityTicketNr}";
         }
 
+        //Refreshing the dashboard according to chosen panel
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             if (isGeneral)
@@ -162,16 +167,7 @@ namespace NoSQLProject
             lblDateTime.Text = DateTime.Now.ToString();
         }
 
-        private void btnGeneral_Click(object sender, EventArgs e)
-        {
-            DisplayGeneralPanel();
-        }
-
-        private void btnPersonal_Click(object sender, EventArgs e)
-        {
-            DisplayPersonalPanel();
-        }
-
+        //opens a ticket view when clicked
         private void listViewTicket_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Ticket ticket = GetTicketById(int.Parse(listViewTicket.SelectedItems[0].Text));
@@ -190,7 +186,7 @@ namespace NoSQLProject
         private void btnLogout_Click(object sender, EventArgs e)
         {
             new LoginForm().Show();
-            this.Close();
+            this.Hide();
         }
 
         //Emre Kutuk individual extra assignment
@@ -206,26 +202,6 @@ namespace NoSQLProject
             this.listViewTicket.ListViewItemSorter = new ListViewItemComparer(e.Column, firstClick);
         }
 
-        // Implements the manual sorting of items by columns.
-        class ListViewItemComparer : IComparer
-        {
-            private int col;
-            bool clicked;
-
-            public ListViewItemComparer(int column, bool clicked)
-            {
-                col = column;
-                this.clicked = clicked;
-            }
-
-            public int Compare(object x, object y)
-            {
-                if (clicked)
-                    return String.Compare(((ListViewItem) x).SubItems[col].Text, ((ListViewItem) y).SubItems[col].Text);
-                else
-                    return String.Compare(((ListViewItem) y).SubItems[col].Text, ((ListViewItem) x).SubItems[col].Text);
-            }
-        }
 
         private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -259,11 +235,6 @@ namespace NoSQLProject
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ticketsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -274,6 +245,15 @@ namespace NoSQLProject
         {
             this.Hide();
             new UserManagementUI(user).Show();
+        }
+
+        private void cmbDashboardType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDashboardType.SelectedIndex == 0)
+                DisplayGeneralPanel();
+            else if (cmbDashboardType.SelectedIndex == 1)
+                DisplayPersonalPanel();
+
         }
     }
 }
