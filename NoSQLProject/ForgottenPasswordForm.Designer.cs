@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SendBtnName = new System.Windows.Forms.Button();
+            this.SendBtnUsername = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.UsernameTxtBox = new System.Windows.Forms.TextBox();
             this.UsernameLbl = new System.Windows.Forms.Label();
@@ -36,8 +36,15 @@
             this.AuthenticationLbl = new System.Windows.Forms.Label();
             this.AuthenticationBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.SendBtnEmail = new System.Windows.Forms.Button();
+            this.EmailTxtBox = new System.Windows.Forms.TextBox();
+            this.EmailLbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.IdLbl = new System.Windows.Forms.Label();
+            this.ShowIdLbl = new System.Windows.Forms.Label();
+            this.ShowNameLbl = new System.Windows.Forms.Label();
+            this.NameLbl = new System.Windows.Forms.Label();
             this.ChangePasswordBtn = new System.Windows.Forms.Button();
             this.ShowEmailLbl = new System.Windows.Forms.Label();
             this.EmailTextLbl = new System.Windows.Forms.Label();
@@ -45,28 +52,21 @@
             this.NewPasswordBox = new System.Windows.Forms.TextBox();
             this.NewPasswordLbl = new System.Windows.Forms.Label();
             this.UsernameTextLbl = new System.Windows.Forms.Label();
-            this.SendBtnEmail = new System.Windows.Forms.Button();
-            this.EmailTxtBox = new System.Windows.Forms.TextBox();
-            this.EmailLbl = new System.Windows.Forms.Label();
-            this.NameLbl = new System.Windows.Forms.Label();
-            this.ShowNameLbl = new System.Windows.Forms.Label();
-            this.ShowIdLbl = new System.Windows.Forms.Label();
-            this.IdLbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // SendBtnName
+            // SendBtnUsername
             // 
-            this.SendBtnName.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.SendBtnName.Location = new System.Drawing.Point(68, 80);
-            this.SendBtnName.Name = "SendBtnName";
-            this.SendBtnName.Size = new System.Drawing.Size(210, 43);
-            this.SendBtnName.TabIndex = 0;
-            this.SendBtnName.Text = "Recover by Username";
-            this.SendBtnName.UseVisualStyleBackColor = false;
-            this.SendBtnName.Click += new System.EventHandler(this.button1_Click);
+            this.SendBtnUsername.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.SendBtnUsername.Location = new System.Drawing.Point(68, 106);
+            this.SendBtnUsername.Name = "SendBtnUsername";
+            this.SendBtnUsername.Size = new System.Drawing.Size(210, 43);
+            this.SendBtnUsername.TabIndex = 0;
+            this.SendBtnUsername.Text = "Recover by Username";
+            this.SendBtnUsername.UseVisualStyleBackColor = false;
+            this.SendBtnUsername.Click += new System.EventHandler(this.SendBtnUsername_Click);
             // 
             // label1
             // 
@@ -79,7 +79,7 @@
             // 
             // UsernameTxtBox
             // 
-            this.UsernameTxtBox.Location = new System.Drawing.Point(68, 52);
+            this.UsernameTxtBox.Location = new System.Drawing.Point(68, 78);
             this.UsernameTxtBox.Name = "UsernameTxtBox";
             this.UsernameTxtBox.Size = new System.Drawing.Size(210, 22);
             this.UsernameTxtBox.TabIndex = 2;
@@ -87,7 +87,7 @@
             // UsernameLbl
             // 
             this.UsernameLbl.AutoSize = true;
-            this.UsernameLbl.Location = new System.Drawing.Point(65, 32);
+            this.UsernameLbl.Location = new System.Drawing.Point(65, 58);
             this.UsernameLbl.Name = "UsernameLbl";
             this.UsernameLbl.Size = new System.Drawing.Size(77, 17);
             this.UsernameLbl.TabIndex = 3;
@@ -125,13 +125,40 @@
             this.panel1.Controls.Add(this.SendBtnEmail);
             this.panel1.Controls.Add(this.EmailTxtBox);
             this.panel1.Controls.Add(this.EmailLbl);
-            this.panel1.Controls.Add(this.SendBtnName);
+            this.panel1.Controls.Add(this.SendBtnUsername);
             this.panel1.Controls.Add(this.UsernameTxtBox);
             this.panel1.Controls.Add(this.UsernameLbl);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(348, 345);
             this.panel1.TabIndex = 8;
+            // 
+            // SendBtnEmail
+            // 
+            this.SendBtnEmail.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.SendBtnEmail.Location = new System.Drawing.Point(68, 252);
+            this.SendBtnEmail.Name = "SendBtnEmail";
+            this.SendBtnEmail.Size = new System.Drawing.Size(210, 43);
+            this.SendBtnEmail.TabIndex = 4;
+            this.SendBtnEmail.Text = "Recover by Email";
+            this.SendBtnEmail.UseVisualStyleBackColor = false;
+            this.SendBtnEmail.Click += new System.EventHandler(this.SendBtnEmail_Click);
+            // 
+            // EmailTxtBox
+            // 
+            this.EmailTxtBox.Location = new System.Drawing.Point(68, 224);
+            this.EmailTxtBox.Name = "EmailTxtBox";
+            this.EmailTxtBox.Size = new System.Drawing.Size(210, 22);
+            this.EmailTxtBox.TabIndex = 5;
+            // 
+            // EmailLbl
+            // 
+            this.EmailLbl.AutoSize = true;
+            this.EmailLbl.Location = new System.Drawing.Point(65, 204);
+            this.EmailLbl.Name = "EmailLbl";
+            this.EmailLbl.Size = new System.Drawing.Size(101, 17);
+            this.EmailLbl.TabIndex = 6;
+            this.EmailLbl.Text = "Email address:";
             // 
             // panel2
             // 
@@ -160,6 +187,42 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(363, 345);
             this.panel3.TabIndex = 10;
+            // 
+            // IdLbl
+            // 
+            this.IdLbl.AutoSize = true;
+            this.IdLbl.Location = new System.Drawing.Point(59, 65);
+            this.IdLbl.Name = "IdLbl";
+            this.IdLbl.Size = new System.Drawing.Size(80, 17);
+            this.IdLbl.TabIndex = 11;
+            this.IdLbl.Text = "Account ID:";
+            // 
+            // ShowIdLbl
+            // 
+            this.ShowIdLbl.AutoSize = true;
+            this.ShowIdLbl.Location = new System.Drawing.Point(175, 62);
+            this.ShowIdLbl.Name = "ShowIdLbl";
+            this.ShowIdLbl.Size = new System.Drawing.Size(20, 17);
+            this.ShowIdLbl.TabIndex = 10;
+            this.ShowIdLbl.Text = "...";
+            // 
+            // ShowNameLbl
+            // 
+            this.ShowNameLbl.AutoSize = true;
+            this.ShowNameLbl.Location = new System.Drawing.Point(175, 135);
+            this.ShowNameLbl.Name = "ShowNameLbl";
+            this.ShowNameLbl.Size = new System.Drawing.Size(20, 17);
+            this.ShowNameLbl.TabIndex = 9;
+            this.ShowNameLbl.Text = "...";
+            // 
+            // NameLbl
+            // 
+            this.NameLbl.AutoSize = true;
+            this.NameLbl.Location = new System.Drawing.Point(59, 135);
+            this.NameLbl.Name = "NameLbl";
+            this.NameLbl.Size = new System.Drawing.Size(49, 17);
+            this.NameLbl.TabIndex = 8;
+            this.NameLbl.Text = "Name:";
             // 
             // ChangePasswordBtn
             // 
@@ -224,78 +287,15 @@
             this.UsernameTextLbl.TabIndex = 0;
             this.UsernameTextLbl.Text = "Username:";
             // 
-            // SendBtnEmail
-            // 
-            this.SendBtnEmail.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.SendBtnEmail.Location = new System.Drawing.Point(68, 252);
-            this.SendBtnEmail.Name = "SendBtnEmail";
-            this.SendBtnEmail.Size = new System.Drawing.Size(210, 43);
-            this.SendBtnEmail.TabIndex = 4;
-            this.SendBtnEmail.Text = "Recover by Email";
-            this.SendBtnEmail.UseVisualStyleBackColor = false;
-            this.SendBtnEmail.Click += new System.EventHandler(this.SendBtnEmail_Click);
-            // 
-            // EmailTxtBox
-            // 
-            this.EmailTxtBox.Location = new System.Drawing.Point(68, 224);
-            this.EmailTxtBox.Name = "EmailTxtBox";
-            this.EmailTxtBox.Size = new System.Drawing.Size(210, 22);
-            this.EmailTxtBox.TabIndex = 5;
-            // 
-            // EmailLbl
-            // 
-            this.EmailLbl.AutoSize = true;
-            this.EmailLbl.Location = new System.Drawing.Point(65, 204);
-            this.EmailLbl.Name = "EmailLbl";
-            this.EmailLbl.Size = new System.Drawing.Size(101, 17);
-            this.EmailLbl.TabIndex = 6;
-            this.EmailLbl.Text = "Email address:";
-            // 
-            // NameLbl
-            // 
-            this.NameLbl.AutoSize = true;
-            this.NameLbl.Location = new System.Drawing.Point(59, 135);
-            this.NameLbl.Name = "NameLbl";
-            this.NameLbl.Size = new System.Drawing.Size(49, 17);
-            this.NameLbl.TabIndex = 8;
-            this.NameLbl.Text = "Name:";
-            // 
-            // ShowNameLbl
-            // 
-            this.ShowNameLbl.AutoSize = true;
-            this.ShowNameLbl.Location = new System.Drawing.Point(175, 135);
-            this.ShowNameLbl.Name = "ShowNameLbl";
-            this.ShowNameLbl.Size = new System.Drawing.Size(20, 17);
-            this.ShowNameLbl.TabIndex = 9;
-            this.ShowNameLbl.Text = "...";
-            // 
-            // ShowIdLbl
-            // 
-            this.ShowIdLbl.AutoSize = true;
-            this.ShowIdLbl.Location = new System.Drawing.Point(175, 62);
-            this.ShowIdLbl.Name = "ShowIdLbl";
-            this.ShowIdLbl.Size = new System.Drawing.Size(20, 17);
-            this.ShowIdLbl.TabIndex = 10;
-            this.ShowIdLbl.Text = "...";
-            // 
-            // IdLbl
-            // 
-            this.IdLbl.AutoSize = true;
-            this.IdLbl.Location = new System.Drawing.Point(59, 65);
-            this.IdLbl.Name = "IdLbl";
-            this.IdLbl.Size = new System.Drawing.Size(80, 17);
-            this.IdLbl.TabIndex = 11;
-            this.IdLbl.Text = "Account ID:";
-            // 
             // ForgottenPasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(362, 367);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Name = "ForgottenPasswordForm";
             this.Text = "Form2";
@@ -312,7 +312,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button SendBtnName;
+        private System.Windows.Forms.Button SendBtnUsername;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox UsernameTxtBox;
         private System.Windows.Forms.Label UsernameLbl;

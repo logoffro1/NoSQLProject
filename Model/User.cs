@@ -16,7 +16,7 @@ namespace Model
         public string lastName { get; set; }
         public string email { get; set; }
         public int nrTickets { get; set; }
-        public bool remember { get; set; }
+        public bool rememberMe { get; set; }
 
     }
 }

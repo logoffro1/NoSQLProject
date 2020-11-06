@@ -1,13 +1,6 @@
 ﻿using Model;
 using Service;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NoSQLProject
@@ -47,10 +40,7 @@ namespace NoSQLProject
                     {
                         this.Hide();
                         new Dashboard(user).Show();
-                        if (RememberMeBox.Checked)
-                        {
-                            user.remember = true;
-                        }
+                        user.rememberMe = RememberMeBox.Checked;
                     }
                     else
                     {
@@ -69,8 +59,6 @@ namespace NoSQLProject
         {
             ForgottenPasswordForm passwordForm = new ForgottenPasswordForm();
             passwordForm.Show();
-            
-            
         }
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)

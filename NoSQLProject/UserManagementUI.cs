@@ -217,7 +217,7 @@ namespace NoSQLProject
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.user.remember)
+            if (this.user.rememberMe)
             {
                 new LoginForm(user).Show();
             }

@@ -13,33 +13,24 @@ namespace NoSQLProject
         private int key;
         public ForgottenPasswordForm()
         {
-            
             InitializeComponent();
             panel1.Show();
             panel2.Hide();
             panel3.Hide();
             NewPasswordBox.PasswordChar = '●';
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private int CreateKey()                                         //creates authentication key
         {
-            
-            selectedUser = CheckUser();
-            try
-            {
-                key = CreateKey();
-                SendMailToUser(selectedUser,key);
-                
-            }
-            catch(Exception ex)
-            {
-                label1.Text = ex.Message;
-            }
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] byteArray = new byte[4];
+            rng.GetBytes(byteArray);
+            int value = BitConverter.ToInt32(byteArray, 0);
+            return value;
         }
-        private User CheckUser()
-        {
-         _ = new User();
-         User_Service userService = new User_Service();
+        private User CheckUser()                                //checks if user with username is 
+        {                                                       //present in db and returns User object
+            _ = new User();
+            User_Service userService = new User_Service();
             if (userService.IsUsernamePresent(UsernameTxtBox.Text))
             {
                 User user = userService.GetUserByName(UsernameTxtBox.Text);
@@ -50,25 +41,25 @@ namespace NoSQLProject
                 return null;
             }
         }
-        private User CheckEmail()
-        {  
-         _ = new User();
-         User_Service userService = new User_Service();
-                if (userService.IsEmailPresent(EmailTxtBox.Text))
-                {
-                    User user = userService.GetUserByEmail(EmailTxtBox.Text);
-                    return user;
-                }
-                else
-                {
-                    return null;
-                }
-            
+        private User CheckEmail()                                 //checks if user with email is
+        {                                                         //present in db and returns User object
+            _ = new User();
+            User_Service userService = new User_Service();
+            if (userService.IsEmailPresent(EmailTxtBox.Text))
+            {
+                User user = userService.GetUserByEmail(EmailTxtBox.Text);
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        private void SendMailToUser(User user,int key)
+        private void SendMailToUser(User user, int key)                         //sends mail to user's email
         {
-            if (user != null){
+            if (user != null)
+            {
                 using (MailMessage mail = new MailMessage())
                 {
                     mail.From = new MailAddress("nosql2020project@gmail.com");
@@ -95,18 +86,10 @@ namespace NoSQLProject
                 MessageBox.Show("Something went wrong!");  //when no username is entered
             }
         }
-        private int CreateKey()
-        {
-         RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] byteArray = new byte[4];
-            rng.GetBytes(byteArray);
-            int value = BitConverter.ToInt32(byteArray, 0);
-            return value;
-        }
 
-        private void AuthenticationBtn_Click(object sender, EventArgs e)
-        {
-            if(AuthenticationTxtBox.Text == key.ToString())
+        private void AuthenticationBtn_Click(object sender, EventArgs e)        //checks if entered code is valid
+        {                                                                       //and shows the next panel with info
+            if (AuthenticationTxtBox.Text == key.ToString())                    //and changable password
             {
                 panel2.Hide();
                 panel3.Show();
@@ -115,9 +98,13 @@ namespace NoSQLProject
                 ShowEmailLbl.Text = selectedUser.email;
                 ShowNameLbl.Text = selectedUser.firstName + " " + selectedUser.lastName;
             }
+            else
+            {
+                MessageBox.Show("Invalid authentication code");
+            }
         }
 
-        private void ChangePasswordBtn_Click(object sender, EventArgs e)
+        private void ChangePasswordBtn_Click(object sender, EventArgs e)        //changes password for user in db
         {
             User_Service service = new User_Service();
             if (NewPasswordBox.Text.Length < 4)
@@ -129,13 +116,27 @@ namespace NoSQLProject
                 service.UpdateUserPassword(selectedUser, NewPasswordBox.Text);
                 this.Close();
                 MessageBox.Show("Password changed successfully!");
-                
+
             }
         }
 
         private void SendBtnEmail_Click(object sender, EventArgs e)
         {
             selectedUser = CheckEmail();
+            try
+            {
+                key = CreateKey();
+                SendMailToUser(selectedUser, key);
+
+            }
+            catch (Exception ex)
+            {
+                label1.Text = ex.Message;               //prints errors on bottom of screen (this should not happen)
+            }
+        }
+        private void SendBtnUsername_Click(object sender, EventArgs e)
+        {
+            selectedUser = CheckUser();
             try
             {
                 key = CreateKey();
