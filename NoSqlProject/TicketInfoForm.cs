@@ -1,9 +1,12 @@
 ﻿using System.Windows.Forms;
 using Model;
-using Service;
+using MongoDB.Bson.Serialization.Conventions;
 
 namespace NoSQLProject
 {
+    /*
+     * Written by Cosmin Ilie (645976)
+     */
     public partial class TicketInfoForm : Form
     {
         private Ticket ticket;
@@ -47,6 +50,7 @@ namespace NoSQLProject
         }
         private void TicketInfoForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if(overview != null)
             overview.LoadListView();
         }
 
