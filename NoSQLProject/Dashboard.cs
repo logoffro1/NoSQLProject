@@ -234,7 +234,8 @@ namespace NoSQLProject
 
         private void configurationItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ConfigItemUi().Show();
+            this.Hide();
+            new ConfigItemUi(user).Show();
         }
 
         private void archivedItemsViewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -261,6 +262,18 @@ namespace NoSQLProject
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ticketsOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new TicketsOverview(user).Show();
+        }
+
+        private void usersOverviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new UserManagementUI(user).Show();
         }
     }
 }

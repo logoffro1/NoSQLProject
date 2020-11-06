@@ -192,18 +192,21 @@
             this.usersOverviewToolStripMenuItem.Name = "usersOverviewToolStripMenuItem";
             this.usersOverviewToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.usersOverviewToolStripMenuItem.Text = "Users Overview";
+            this.usersOverviewToolStripMenuItem.Click += new System.EventHandler(this.usersOverviewToolStripMenuItem_Click);
             // 
             // configurationItemsToolStripMenuItem
             // 
             this.configurationItemsToolStripMenuItem.Name = "configurationItemsToolStripMenuItem";
             this.configurationItemsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
             this.configurationItemsToolStripMenuItem.Text = "Configuration Items";
+            this.configurationItemsToolStripMenuItem.Click += new System.EventHandler(this.configurationItemsToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // TicketsOverview
             // 

@@ -40,11 +40,11 @@
             this.cmbType = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnBack = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ticketsOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersOverviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,23 +135,14 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Filter:";
             // 
-            // btnBack
-            // 
-            this.btnBack.Location = new System.Drawing.Point(404, 60);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(181, 48);
-            this.btnBack.TabIndex = 7;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ticketsOverviewToolStripMenuItem,
             this.usersOverviewToolStripMenuItem,
-            this.configurationItemsToolStripMenuItem});
+            this.configurationItemsToolStripMenuItem,
+            this.logoutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -163,19 +154,28 @@
             this.ticketsOverviewToolStripMenuItem.Name = "ticketsOverviewToolStripMenuItem";
             this.ticketsOverviewToolStripMenuItem.Size = new System.Drawing.Size(96, 24);
             this.ticketsOverviewToolStripMenuItem.Text = "Dashboard";
-           
+            this.ticketsOverviewToolStripMenuItem.Click += new System.EventHandler(this.dashboardToolStripMenuItem_Click);
             // 
             // usersOverviewToolStripMenuItem
             // 
             this.usersOverviewToolStripMenuItem.Name = "usersOverviewToolStripMenuItem";
             this.usersOverviewToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.usersOverviewToolStripMenuItem.Text = "Tickets Overview";
+            this.usersOverviewToolStripMenuItem.Click += new System.EventHandler(this.ticketOverviewToolStripMenuItem_Click);
             // 
             // configurationItemsToolStripMenuItem
             // 
             this.configurationItemsToolStripMenuItem.Name = "configurationItemsToolStripMenuItem";
             this.configurationItemsToolStripMenuItem.Size = new System.Drawing.Size(154, 24);
             this.configurationItemsToolStripMenuItem.Text = "Configuration Items";
+            this.configurationItemsToolStripMenuItem.Click += new System.EventHandler(this.configurationItemsToolStripMenuItem_Click);
+            // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
+            this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // UserManagementUI
             // 
@@ -183,7 +183,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 487);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.cmbType);
@@ -214,10 +213,10 @@
         private System.Windows.Forms.ComboBox cmbType;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ticketsOverviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usersOverviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configurationItemsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
     }
 }
