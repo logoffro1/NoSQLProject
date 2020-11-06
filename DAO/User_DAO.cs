@@ -81,7 +81,19 @@ namespace DAO
             }
             return null;
         }
+        public User GetUserByFullName(string firstname, string lastname)
+        {
+            List<User> users = GetAllUsers();
+            foreach (User user in users)
+            {
+                if (user.firstName == firstname && user.lastName == lastname)
+                {
+                    return user;
+                }
 
+            }
+            return null;
+        }
         public User GetUserByEmail(string email)
         {
             List<User> users = GetAllUsers();

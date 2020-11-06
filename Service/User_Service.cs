@@ -40,6 +40,10 @@ namespace Service
         {
             return userDAO.GetUserByName(username);
         }
+        public User GetUserByFullName(string firstname, string lastname)
+        {
+            return userDAO.GetUserByFullName(firstname, lastname);
+        }
         public User GetUserByEmail(string email)
         {
             return userDAO.GetUserByEmail(email);

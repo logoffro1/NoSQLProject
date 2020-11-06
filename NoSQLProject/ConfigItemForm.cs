@@ -42,9 +42,9 @@ namespace NoSQLProject
             if (ci == null) // if null then new CI
             {
                 ci = new ConfigurationItem(textBoxCIName.Text, textBoxCIDescription.Text,
-                    int.Parse(comboBoxOwner.SelectedItem.ToString().Split(' ')[0]),
+                   Int32.Parse(comboBoxOwner.SelectedValue.ToString()),
                     textBoxLocation.Text,
-                    (TicketPriorityType) comboBoxImportance.SelectedIndex);
+                    (TicketPriorityType)comboBoxImportance.SelectedIndex);
             }
             else // Else editing
             {
@@ -52,7 +52,7 @@ namespace NoSQLProject
                 ci.Description = textBoxCIDescription.Text;
                 ci.Owner = Int32.Parse(comboBoxOwner.SelectedValue.ToString());
                 ci.Location = textBoxLocation.Text;
-                ci.Importance = (TicketPriorityType) comboBoxImportance.SelectedIndex;
+                ci.Importance = (TicketPriorityType)comboBoxImportance.SelectedIndex;
             }
 
 
@@ -67,7 +67,7 @@ namespace NoSQLProject
 
             MessageBox.Show($"Configuration Item Added\n{ci.ToString()}"); // Successfully added
 
-            ConfigItemUi ciForm = (ConfigItemUi) Application.OpenForms["ConfigItemUI"];// Update the List in Original Form
+            ConfigItemUi ciForm = (ConfigItemUi)Application.OpenForms["ConfigItemUI"];// Update the List in Original Form
             ciForm.UpdateList();
             this.Close();
         }
@@ -108,7 +108,7 @@ namespace NoSQLProject
                 textBoxCIDescription.Text = ci.Description;
                 textBoxCIName.Text = ci.Name;
                 textBoxLocation.Text = ci.Location;
-                comboBoxImportance.SelectedIndex = (int) ci.Importance;
+                comboBoxImportance.SelectedIndex = (int)ci.Importance;
                 comboBoxOwner.SelectedValue = ci.Owner;
             }
             else

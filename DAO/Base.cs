@@ -58,8 +58,7 @@ namespace DAO
             return database.GetCollection<BsonDocument>(collectionName);
         }
 
-        protected async void
-            CreateDocument(string collectionName, BsonDocument data) //Inserts the data into the specified collection
+        protected async void CreateDocument(string collectionName, BsonDocument data) //Inserts the data into the specified collection
         {
             data = AddTimeStamp(data);
             await GetCollection(collectionName).InsertOneAsync(data);
@@ -70,8 +69,7 @@ namespace DAO
             return GetCollection(collectionName).Find(new BsonDocument()).ToList();
         }
 
-        protected BsonDocument
-            ReadDocument(string collectionName, string columnName,
+        protected BsonDocument ReadDocument(string collectionName, string columnName,
                 int id) //reads only one document from the DB based on the filter
         {
             var filter = Builders<BsonDocument>.Filter.Eq(columnName, id);
