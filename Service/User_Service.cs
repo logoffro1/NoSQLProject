@@ -20,6 +20,10 @@ namespace Service
         {
             return userDAO.IsUsernamePresent(username);
         }
+        public bool IsEmailPresent(string email)
+        {
+            return userDAO.IsEmailPresent(email);
+        }
         public List<User> getAllUsers()
         {
             return userDAO.GetAllUsers();
@@ -35,6 +39,10 @@ namespace Service
         public User GetUserByName(string username)
         {
             return userDAO.GetUserByName(username);
+        }
+        public User GetUserByEmail(string email)
+        {
+            return userDAO.GetUserByEmail(email);
         }
         public void UpdateUserPassword(User user,string password)
         {

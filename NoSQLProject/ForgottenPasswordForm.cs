@@ -18,6 +18,7 @@ namespace NoSQLProject
             panel1.Show();
             panel2.Hide();
             panel3.Hide();
+            NewPasswordBox.PasswordChar = '●';
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,8 +38,8 @@ namespace NoSQLProject
         }
         private User CheckUser()
         {
-            _ = new User();
-            User_Service userService = new User_Service();
+         _ = new User();
+         User_Service userService = new User_Service();
             if (userService.IsUsernamePresent(UsernameTxtBox.Text))
             {
                 User user = userService.GetUserByName(UsernameTxtBox.Text);
@@ -49,6 +50,22 @@ namespace NoSQLProject
                 return null;
             }
         }
+        private User CheckEmail()
+        {  
+         _ = new User();
+         User_Service userService = new User_Service();
+                if (userService.IsEmailPresent(EmailTxtBox.Text))
+                {
+                    User user = userService.GetUserByEmail(EmailTxtBox.Text);
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            
+        }
+
         private void SendMailToUser(User user,int key)
         {
             if (user != null){
@@ -68,13 +85,14 @@ namespace NoSQLProject
 
                     }
                 }
+                MessageBox.Show("An email with the authentication code has been sent to the registered email address!");
                 label1.Text = "";
                 panel1.Hide();
                 panel2.Show();
             }
             else
             {
-                label1.Text = "Something went wrong!";
+                MessageBox.Show("Something went wrong!");  //when no username is entered
             }
         }
         private int CreateKey()
@@ -92,8 +110,10 @@ namespace NoSQLProject
             {
                 panel2.Hide();
                 panel3.Show();
+                ShowIdLbl.Text = selectedUser.id.ToString();
                 ShowUsernameLbl.Text = selectedUser.username;
                 ShowEmailLbl.Text = selectedUser.email;
+                ShowNameLbl.Text = selectedUser.firstName + " " + selectedUser.lastName;
             }
         }
 
@@ -110,6 +130,21 @@ namespace NoSQLProject
                 this.Close();
                 MessageBox.Show("Password changed successfully!");
                 
+            }
+        }
+
+        private void SendBtnEmail_Click(object sender, EventArgs e)
+        {
+            selectedUser = CheckEmail();
+            try
+            {
+                key = CreateKey();
+                SendMailToUser(selectedUser, key);
+
+            }
+            catch (Exception ex)
+            {
+                label1.Text = ex.Message;
             }
         }
     }

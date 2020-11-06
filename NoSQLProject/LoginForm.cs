@@ -25,6 +25,8 @@ namespace NoSQLProject
             InitializeComponent();
             PasswordTxtBox.PasswordChar = '●';
             UsernameTxtBox.Text = user.username;
+            PasswordTxtBox.Text = user.password;
+            RememberMeBox.Checked = true;
         }
 
 
@@ -34,7 +36,7 @@ namespace NoSQLProject
             User_Service userService = new User_Service();
             if ((UsernameTxtBox.Text.Length < 1) || (PasswordTxtBox.Text.Length < 1))
             {
-                label1.Text = "Missing credentials";
+                MessageBox.Show("Missing credentials!");
             }
             else
             {
@@ -45,28 +47,30 @@ namespace NoSQLProject
                     {
                         this.Hide();
                         new Dashboard(user).Show();
+                        if (RememberMeBox.Checked)
+                        {
+                            user.remember = true;
+                        }
                     }
                     else
                     {
-                        label1.Text = "Incorrect username or password";
+                        MessageBox.Show("Incorrect username or password"); //password doesn't match
                     }
                 }
                 else
                 {
-                    label1.Text = "Username does not exist";
+                    MessageBox.Show("Incorrect username or password"); //username does not exist in the db
                 }
             }
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void ForgotPasswordLbl_Click(object sender, EventArgs e)
         {
             ForgottenPasswordForm passwordForm = new ForgottenPasswordForm();
             passwordForm.Show();
+            
+            
         }
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -55,6 +55,19 @@ namespace DAO
 
             return false;
         }
+        public bool IsEmailPresent(string email)
+        {
+
+            List<BsonDocument> users = ReadDocuments("users");
+
+            foreach (BsonDocument doc in users)
+            {
+                if (doc["email"].AsString.ToLower().Equals(email.ToLower()))
+                    return true;
+            }
+
+            return false;
+        }
         public User GetUserByName(string username)
         {           
             List<User> users = GetAllUsers();
@@ -66,12 +79,21 @@ namespace DAO
                 }
                     
             }
-            return new User  //this is unreachable
+            return null;
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            List<User> users = GetAllUsers();
+            foreach (User user in users)
             {
-                id = 0
-            };
+                if (user.email == email)
+                {
+                    return user;
+                }
 
-
+            }
+            return null;
         }
         private BsonDocument CreateUserDocument(User user)
         {

@@ -185,7 +185,12 @@ namespace NoSQLProject
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            new LoginForm().Show();
+            if (this.user.remember)
+            {
+                new LoginForm(user).Show();
+            }
+            else
+                new LoginForm().Show();
             this.Hide();
         }
 
