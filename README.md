@@ -1,2 +1,2 @@
 # service-desk-app
- service desk application thats been developed with C# and MongoDB
+ service desk app that has been developed by C# and MongoDB
